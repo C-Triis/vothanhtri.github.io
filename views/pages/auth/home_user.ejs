@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head_user.ejs'); %>
+
+    <body>
+        <!-- header -->
+        <%- include('../../partials/header_user.ejs'); %>
+            <!-- banner -->
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://static.nike.com/a/images/f_auto/dpr_1.0,cs_srgb/w_1180,c_limit/b6de205f-c91a-4cb2-b58a-b2bb29080cd0/nike-just-do-it.jpg"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://drake.vn/image/cache/catalog/banner/banner-lớn/Chuck-70-banner-web-home1-1500x560.jpg"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://media.gucci.com/content/HeroRegularStandard_1600x675/1683135030/HeroRegularStandard_Summer-stories-2023-03_001_Default.jpg"
+                            class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ship-onl-back -->
+            <div class="d-flex justify-content-around text-center box_support">
+                <div class="box_item d-flex text-start">
+                    <i class="fa fa-truck-fast "></i>
+                    <div class="box_content">
+                        <p class="text-dark">Free Shipping</p>
+                        <span>Lorem Ipsum is simply</span>
+                    </div>
+                </div>
+                <span class="scri"></span>
+                <div class="box_item d-flex text-start">
+                    <i class="fa fa-phone"></i>
+                    <div class="box_content">
+                        <p class="text-dark">Online Support</p>
+                        <span>Lorem Ipsum is simply</span>
+                    </div>
+                </div>
+                <span class="scri"></span>
+                <div class="box_item d-flex text-start">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <div class="box_content">
+                        <p class="text-dark">Money Back</p>
+                        <span>Lorem Ipsum is simply</span>
+                    </div>
+                </div>
+                <span class="scri"></span>
+                <div class="box_item d-flex text-start">
+                    <i class="fa-solid fa-gear"></i>
+                    <div class="box_content">
+                        <p class="text-dark">Our Services</p>
+                        <span>Lorem Ipsum is simply</span>
+                    </div>
+                </div>
+            </div>
+            <!-- title -->
+            <div class="title_h2">
+                <h2>Top Categories</h2>
+            </div>
+            <!-- list product -->
+            <div class="container mt-4">
+                <div class="row">
+                    <% product.forEach(function(product) { %>
+                        <div class="col col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                            <div class="product mb-5">
+                                <div class="img_pro">
+                                    <a href="#">
+                                        <span class="sale"><%= product.percent_prod %></span>
+                                        <span class="sale_01">Sale</span>
+                                        <img src="<%= product.img_prod %>"
+                                            alt="" class="img-represent">
+                                        <span class="icon_pro_left">
+                                            <i class="fa-solid fa-heart"></i>
+                                            <i class="fa-solid fa-eye"></i>
+                                        </span>
+                                        <span class="icon_pro_right">
+                                            <i class="fa-sharp fa-solid fa-bars-staggered"></i>
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </span>
+                                        <img src="<%= product.img_prod %>"
+                                            alt="" class="img_hover">
+                                    </a>
+                                </div>
+                                <div class="reviwes_pro">
+                                    <div class="star">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+                                    <div class="name_pro">
+                                        <a href="#">
+                                            <h4> <%= product.name_prod %> </h4>
+                                            <p class="price">Hãng: <%= product.brandName %></p>
+                                            <p class="price"><%= product.price_prod %></p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+
+            </div>
+            <!-- banner sale -->
+            <div class="container-fluid bg_sale">
+                <div class="iz">
+                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/catalog/cms-banner.jpg" alt="">
+                </div>
+                <div class="text_sale">
+                    <h2>30% Save</h2>
+                    <p>Latest Ceramic Art</p>
+                    <span>There are many variations of passages of Lorem.</span>
+                    <button><a href="#">Shop Now</a></button>
+                </div>
+            </div>
+
+            <!-- Blog -->
+            <div class="title_h2">
+                <h2>Latest Blog</h2>
+            </div>
+            <div class="blog container">
+                <div class="box_blog">
+                    <div class="blog_img">
+                        <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/blog-5-893x752.jpg"
+                            alt="">
+                        <span class="icon_left"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <span class="icon_right"><i class="fa-solid fa-link"></i></span>
+                        <div class="blog_content">
+                            <div class="date">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <p>Feb 28 ,2018</p>
+                            </div>
+                            <h5><a href="#">Quis Autem Reprehender Pariatur</a></h5>
+                            <p> 1914 translation by H. Rackham"But I must explain to you how... </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_blog">
+                    <div class="blog_img">
+                        <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/blog-5-893x752.jpg"
+                            alt="">
+                        <span class="icon_left"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <span class="icon_right"><i class="fa-solid fa-link"></i></span>
+                        <div class="blog_content">
+                            <div class="date">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <p>Feb 28 ,2018</p>
+                            </div>
+                            <h5><a href="#">Quis Autem Reprehender Pariatur</a></h5>
+                            <p> 1914 translation by H. Rackham"But I must explain to you how... </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_blog">
+                    <div class="blog_img">
+                        <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/blog-5-893x752.jpg"
+                            alt="">
+                        <span class="icon_left"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <span class="icon_right"><i class="fa-solid fa-link"></i></span>
+                        <div class="blog_content">
+                            <div class="date">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <p>Feb 28 ,2018</p>
+                            </div>
+                            <h5><a href="#">Quis Autem Reprehender Pariatur</a></h5>
+                            <p> 1914 translation by H. Rackham"But I must explain to you how... </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <%- include('../../partials/footer_user.ejs'); %>
+
+                <!-- Js -->
+                <script>
+                    // scroll navbar
+                    window.onscroll = function () { scrollSticky() }
+                    function scrollSticky() {
+                        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+                            document.getElementById("navbar").style.height = "auto";
+                            document.getElementById("navbar").style.background = " rgba(48, 48, 48, 0.8)";
+                            document.getElementById('navbar').style.color = "#fff"
+                        } else {
+                            document.getElementById("navbar").style.height = "80px";
+                            document.getElementById("navbar").style.background = " rgba(100, 100, 100, 0.5)"
+                        }
+                    }
+
+
+                </script>
+    </body>
+
+</html>

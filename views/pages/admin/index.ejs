@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head'); %>
+
+    <body>
+        <%- include('../../partials/header'); %>
+            <div class="container ">
+                <div class="container mt-4">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+                        <div class="tm-bg-primary-dark tm-block tm-block-products">
+                            <div class="d-flex justify-content-between ">
+                                <h1>Danh sách sản phẩm</h1>
+                                <div class=" d-flex search">
+                                    <form action="">
+                                        <input type="search" name="search" id="search" placeholder="Search">
+                                        <button type="submit" class="btn-primary p-auto">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tm-product-table-container">
+                                <table class="table table-hover tm-table-small tm-product-table mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Tên sản phẩm</th>
+                                            <th scope="col">Hãng</th>
+                                            <th scope="col">Ảnh sản phẩm</th>
+                                            <th scope="col">Giảm</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col" colspan="2" class="text-center">Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% product.forEach(function(product, index) { %>
+                                            <tr>
+                                                <th scope="row" class="align-middle">
+                                                    <%= index+1 %>
+                                                </th>
+                                                <td class="align-middle">
+                                                    <%= product.name_prod %>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <%= product.brandName %>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <img src="<%= product.img_prod %>" alt="" class="img_sp">
+                                                </td>
+                                                <td class="align-middle">
+                                                    <%= product.percent_prod %>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <%= product.price_prod %>
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <span onclick='editItem("<%= product._id %>")' class="icon-cn"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <i class="fa-regular fa-pen-to-square"></i>
+                                                    </span>
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <span class="icon-cn" data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop<%= product._id %>">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <div class="modal fade" id="staticBackdrop<%= product._id %>" tabindex="-1"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Xóa
+                                                                sản
+                                                                phẩm</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Bạn có chắc xóa <%= product.name_prod %>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-12 modal-footer">
+                                                            <button onclick='deleteItem("<%= product._id %>")'
+                                                                class="btn btn-danger gap-2 col-3"
+                                                                data-bs-toggle="modal">Xóa</button>
+                                                            <button class="btn btn-secondary gap-2 col-3"
+                                                                data-bs-dismiss="modal">Hủy</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav aria-label="Page navigation example" class="mt-5">
+                                <ul class="pagination nav-add ">
+                                    <li>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#addProduct">
+                                            Thêm sản phẩm mới
+                                        </button>
+                                    </li>
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link prev" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <% for(var i=1; i <=3; i++) { %>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/product/list?page=<%= i %>">
+                                                    <%= i %>
+                                                </a>
+                                            </li>
+                                            <% }; %>
+                                                <li class="page-item next">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                    </ul>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal editItem -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật thông tin sản phẩm</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-md-12">
+                                    <form id="uploadFile" enctype="multipart/form-data">
+                                        <input type="file" name="file" id="changeImg" multiple='multiple' />
+                                        <button type="button" value="Upload File" name="submit" class="btn btn-primary"
+                                            id="btnImgOld">Upload</button>
+                                    </form>
+                                </div>
+                                <div id="formEdit" class="row mt-0"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal add Product -->
+                <div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm sản phẩm mới</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="uploadFile" enctype="multipart/form-data">
+                                    <input type="file" name="file" id="img" />
+                                    <button type="button" value="Upload File" name="submit" class="btn btn-primary"
+                                        id="btnUploadImg">Upload</button>
+                                </form>
+                                <form class="row g-3" action="/product/add" method="post">
+                                    <div class="col-6">
+                                        <img id="imgAdd" height="100px" width="100px" />
+                                        <input type="hidden" class="form-control" name="img_prod" id="img_prod">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="name_prod" class="form-label">Tên sản phẩm</label>
+                                        <input type="text" class="form-control ps-3" id="name_prod" name="name_prod"
+                                            placeholder="Nhập tên sản phẩm">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="name_prod" class="form-label">Tên hãng</label>
+                                        <input type="text" class="form-control ps-3" id="brandName" name="brandName"
+                                            placeholder="Nhập tên hãng">
+                                    </div>
+                                    <div class="col-6 row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="price_prod" class="form-label">Giá sản phẩm</label>
+                                            <input type="text" class="form-control ps-3" id="price_prod"
+                                                name="price_prod" placeholder="Nhập giá sản phẩm">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="percent_prod" class="form-label">Giảm</label>
+                                            <input type="text" class="form-control ps-3" id="percent_prod"
+                                                name="percent_prod" placeholder="Nhập giá sản phẩm">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 ms-4">
+                                            <label for="des_prod" class="form-label">Mô tả sản phẩm</label>
+                                            <textarea type="text" class="form-control" id="des_prod" name="des_prod"
+                                                placeholder="Thông tin sản phẩm"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+
+                // edit Item Product
+                function editItem(productId) {
+                    $.ajax({
+                        type: "GET",
+                        url: `/product/detail/${productId}`,
+                        success: function (rs) {
+                            if (rs.s === 200) {
+                                let productInfo = rs.data;
+                                var formEdit = ` 
+                    
+                                    <form class="row" action="/product/edit" method="post">
+                                        <div>
+                                        <input type="text" class="form-control" id="_id" name="_id" value="${productInfo._id}" style="display:none">
+                                        </div>
+                                        <div class="col-md-6">
+                                                    <img id="oldUrl" height="100px" width="100px" src="${productInfo.img_prod}" class="mt-2" />
+                                                    <input type="hidden" class="form-control" name="img_prod" id="oldImg" value='${productInfo.img_prod}'>
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                        <label for="name_prod" class="form-label">Tên sản phẩm</label>
+                                        <input type="text" class="form-control ps-3" id="name_prod" name="name_prod" placeholder="Nhập tên"
+                                            value="${productInfo.name_prod}">
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                        <label for="brandName" class="form-label">Tên hãng</label>
+                                        <input type="text" class="form-control ps-3" id="brandName" name="brandName" placeholder="Nhập tên"
+                                            value="${productInfo.brandName}">
+                                        </div>
+                                        <div class="col-md-6 mt-4 row">
+                                           <div class="col-md-6">
+                                            <label for="price_prod" class="form-label">Giá</label>
+                                            <input type="text" class="form-control ps-3" id="price_prod" name="price_prod" placeholder="Nhập Giá"
+                                                value="${productInfo.price_prod}">
+                                            </div>
+                                            <div class="col-md-6">
+                                            <label for="percent_prod" class="form-label">Giảm</label>
+                                            <input type="text" class="form-control ps-3" id="percent_prod" name="percent_prod" placeholder="Nhập phần trăm giảm giá"
+                                                value="${productInfo.percent_prod}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 ms-4">
+                                        <label for="des_prod" class="form-label">Thông tin sản phẩm</label>
+                                        <textarea type="text" class="form-control" id="des_prod" name="des_prod" placeholder="Thông tin sản phẩm">${productInfo.des_prod}</textarea>
+                                        </div>
+                                        <div class="modal-footer mt-4">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+                                    `;
+                                $("#formEdit").html(formEdit);
+                            } else {
+                                alert(rs.msg);
+                            }
+                        },
+                    });
+                }
+
+                // delete Item Product
+                function deleteItem(productId) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `/product/delete/${productId}`,
+                        success: function (rs) {
+                            console.log(rs);
+                            if (rs.s === 200) {
+                                window.location.reload();
+                            } else {
+                                alert(rs.msg);
+                            }
+                        },
+                    });
+                }
+
+                // add Img Product
+                $('#btnUploadImg').on('click', function () {
+                    var myformData = new FormData();
+                    myformData.append('file', $('#img')[0].files[0]);
+                    console.log(myformData);
+                    $.ajax({
+                        url: '/upload-image',
+                        type: 'POST',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: myformData,
+                        enctype: 'multipart/form-data',
+                        success: function (rs) {
+                            if (rs.s === 200) {
+                                $("#imgAdd").attr("src", rs.url);
+                                $("#img_prod").val(rs.url)
+                                console.log(rs.url);
+                            } else {
+                                alert(rs.msg);
+                            }
+                        },
+                    });
+                });
+
+                // changeImage
+                $('#btnImgOld').on('click', function () {
+                    var myformData = new FormData();
+                    myformData.append('file', $('#changeImg')[0].files[0]);
+                    console.log(myformData);
+                    $.ajax({
+                        url: '/upload-image',
+                        type: 'POST',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        data: myformData,
+                        enctype: 'multipart/form-data',
+                        success: function (rs) {
+                            if (rs.s === 200) {
+                                $('#oldUrl').attr('src', rs.url);
+                                $('#oldImg').val(rs.url);
+                                console.log(rs.url);
+                            } else {
+                                alert(rs.msg)
+                            }
+                        },
+                    });
+                });
+
+                // next page - prev page
+
+            </script>
+
+    </body>
+
+</html>

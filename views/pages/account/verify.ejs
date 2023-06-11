@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head'); %>
+
+    <body>
+
+        <%- include('../../partials/header'); %>
+
+            <div class="container-fluid bg">
+                <div class="row">
+                    <div class="wrapper position-absolute top-50 start-50 translate-middle">
+                        <div class="box-form">
+                            <h3 class="text-center mb-4 text-uppercase mt-3">Xác thực tài khoản</h3>
+                            <form action="/verify" method="post">
+                                <div class="form-group mt-5">
+                                    <label for="otp" class="pb-2">Mã OTP</label>
+                                    <input type="text"  id="otp" name="otp">
+                                </div>
+                                <div class="btn-sub mt-5 text-end">
+                                    <button type="submit" class="btn btn-bg">Confirm</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+
+</html>

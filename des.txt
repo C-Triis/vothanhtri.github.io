@@ -1,0 +1,38 @@
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus 
+vel facilisis volutpat est velit.
+
+    <div class="product">
+                            <div class="img_pro">
+                                <a href="#">
+                                    <span class="sale">8% Off</span>
+                                    <span class="sale_01">Sale</span>
+                                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/02-278x320.jpg"
+                                        alt="" class="img-represent">
+                                    <span class="icon_pro_left">
+                                        <i class="fa-solid fa-heart"></i>
+                                        <i class="fa-solid fa-eye"></i>
+                                    </span>
+                                    <span class="icon_pro_right">
+                                        <i class="fa-sharp fa-solid fa-bars-staggered"></i>
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                    </span>
+                                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/03-278x320.jpg"
+                                        alt="" class="img_hover">
+                                </a>
+                            </div>
+                            <div class="reviwes_pro">
+                                <div class="star">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <div class="name_pro">
+                                    <a href="#">
+                                        <h4>Aliquam Quaerat </h4>
+                                        <p class="price">$108.80</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
