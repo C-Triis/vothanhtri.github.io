@@ -7,11 +7,23 @@ const ProductController = require('../controllers/producController.js');
 // router.get('/list', ProductController.getList);
 router.get("/list", (req, res) => {
     let page = req.query.page;
-    let keySearch = req.query.keySearch;
+    let keySearch = req.query.keySearch || "";
     if (!page || parseInt(page) <= 0) {
         page = 1;
     }
     ProductController.getList(page, keySearch).then(rs =>{
+        res.render("pages/admin/index", {
+            product: rs,
+        })
+    })
+});
+router.get("/list", (req, res) => {
+    let page = req.query.page;
+    let keySearch = req.query.keySearch || "";
+    if (!page || parseInt(page) <= 0) {
+        page = 1;
+    }
+    ProductController.userSearch(page, keySearch).then(rs =>{
         res.render("pages/admin/index", {
             product: rs,
         })

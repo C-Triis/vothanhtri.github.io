@@ -13,7 +13,7 @@ function ProductController() {
           try {
             let skip = (parseInt(page) - 1) * SELF.SIZE;
             let regex = new RegExp(keySearch);
-            return Product.find()
+            return Product.find({ $or: [{ name_prod: regex }, { brandName: regex }] })
               .skip(skip)
               .limit(SELF.SIZE)
               .then((rs) => {
@@ -25,6 +25,23 @@ function ProductController() {
             console.log(error);
           }
           },
+        userSearch: (page, keySearch) => {
+          try {
+            let skip = (parseInt(page) - 1) * SELF.SIZE;
+            let regex = new RegExp(keySearch);
+            return Product.find({ $or: [{ name_prod: regex }, { brandName: regex }] })
+              .skip(skip)
+              .limit(SELF.SIZE)
+              .then((rs) => {
+                return rs
+              })
+              .catch((error) => {
+              });
+          } catch (error) {
+            console.log(error);
+          }
+        },
+
           addProduct: (req, res) => {
             try {
               let data = req.body;
