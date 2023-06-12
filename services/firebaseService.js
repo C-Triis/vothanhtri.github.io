@@ -2,8 +2,8 @@ const admin = require("firebase-admin");
 const path = require('path');
 
 admin.initializeApp({
-    credential: admin.credential.cert(path.join(__dirname, 'newbie-b80cd.json')),
-    storageBucket: "newbie-b80cd.appspot.com"
+    credential: admin.credential.cert(path.join(__dirname, 'shoe-name.json')),
+    storageBucket: "shoe-name.appspot.com"
 });
 
 const bucket = admin.storage().bucket();
