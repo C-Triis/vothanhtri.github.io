@@ -17,8 +17,8 @@
 }
 .nav-item:hover{
     transition: 0.3s    ;
-    background: #38383888;
-    /* border-radius: 12px; */
+    background: #d4d4d488;
+    border-radius: 12px;
 }
 
 
@@ -260,7 +260,7 @@
 .text_sale h2{
     font-size: 70px;
     font-weight: 500;
-    color: white;
+    color: black;
 }
 
 .text_sale p{
@@ -275,13 +275,14 @@
     font-size: 14px;
     letter-spacing: .7px;
     font-weight: 400;
-    color: #888888;
+    color: #ffffff;
     margin-top: 13px;
     display: block;
 }
 
 .text_sale button{
     padding: 12px 34px;
+    border-radius: 12px;
     margin-top: 90px;
     border: none;
 }

@@ -8,6 +8,7 @@ const account = require('./routes/account.js')
 const brand = require('./routes/brands.js')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const session = require("express-session")
 
 
 
@@ -19,12 +20,26 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
-app.use('/', home)
+
+
+app.use(
+    session({
+      secret: "456456456",
+      saveUninitialized: true,
+      cookie: { maxAge: 1000 * 60 * 60 * 24 },
+      resave: false,
+    })
+  );
 app.use('/product', product)
 app.use('/account', account)
-app.use('/brand', brand)
 
+app.use(function(req, res, next) {
+    res.locals.user = req.session.userId;
+    next();
+});
 
+  app.use('/', home)
+  app.use('/brand', brand)
 
 //Kiểm tra mongoodb được kết nối chưa
 mongoose 

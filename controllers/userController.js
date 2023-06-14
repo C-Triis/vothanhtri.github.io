@@ -7,6 +7,8 @@ const LocalStorage = require("node-localstorage").LocalStorage;
 const localStorage = new LocalStorage("./localStorage");
 const jwt = require("jsonwebtoken");
 const CONFIG = require("../config");
+const session = require("express-session")
+const emailService = require("../services/emailService")
 
 
 function UserController() {
@@ -40,27 +42,27 @@ function UserController() {
         }
         return SELF.enCodePass(data?.password).then((hash) => {
           let otp = (Math.random() + 1).toString(36).substring(6);
-          //Todo: Call service email -> send otp to email user
-          return User.create({
-            username: data?.username,
-            password: hash,
-            email: data?.email,
-            otp: otp,
-          })
+          emailService.SendMailSG(otp,data?.email).then(()=>{
+            return User.create({
+              username: data?.username,
+              password: hash,
+              otp: otp,
+            })
             .then(async (rs) => {
-              if (rs) {
+              if(rs) {
                 await localStorage.setItem("email", data?.email);
-                return res.redirect("/verifyUser");
+                return res.redirect("/account/verifyUser");
               }
             })
             .catch((e) => {
-              Logger.error(`Create user fail: ${e}`);
+              console.log(`Create user fail: ${e}`);
             });
+          });
         });
       } catch (error) {
         Logger.error(`register - fail: ${error}`);
       }
-    },
+    }, 
     verify: async (req, res) => {
       try {
         let data = req.body;
@@ -75,7 +77,7 @@ function UserController() {
               userInfo.active = true;
               userInfo.otp = "";
               await User.updateOne({ _id: userInfo._id }, userInfo);
-              res.redirect("/login");
+              res.redirect("/account/login");
             } else {
               return res.json({ s: 400, msg: "OTP chua chinh xac" });
             }
@@ -114,6 +116,8 @@ function UserController() {
               );
               userInfo.token = token;
               await User.updateOne({ _id: userInfo._id }, userInfo);
+              let session = req.session;
+              session.userId = token;
               res.redirect("/product/list");
             } else {
               res.json({ s: 400, msg: "Password khong chinh xac" });
@@ -134,7 +138,7 @@ function UserController() {
           .compare(data?.oldPassword, userInfo.password)
           .then( async (rs) => {
             if(rs) {
-              return res.redirect("/login");
+              return res.redirect("/account/login");
             } else {
               res.json({ s: 400, msg: "Password khong chinh xac" });
             }
@@ -143,7 +147,20 @@ function UserController() {
       } catch (error){
         Logger.error(`reset - fail: ${error}`)
       }
-    }
+    },
+    checkLogin: async (req, res, next) => {
+      try {
+        let session = req.session;
+        if (session.userId) {
+          //Todo: token => verify Database
+          return next();
+        } else {
+          return res.redirect("/account/login");
+        }
+      } catch (error) {
+       console.log(`checkLogin - fail: ${error}`);
+      }
+    },
   };
 }
 
