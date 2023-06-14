@@ -7,7 +7,7 @@ const Promotion = mongoose.Schema(
         promo_percent: {type: String},
         start_date: {type: String},
         end_date: {type: String},
-        productIds: {type: String},
+        productIds: {type: Array},
         promo_des: {type: String}
     },
     { versionKey: false, timestamps: true }

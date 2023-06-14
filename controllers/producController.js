@@ -41,8 +41,7 @@ function ProductController() {
             console.log(error);
           }
         },
-
-          addProduct: (req, res) => {
+        addProduct: (req, res) => {
             try {
               let data = req.body;
               console.log(data);
@@ -56,8 +55,8 @@ function ProductController() {
             } catch (error) {
               console.log(error);
             }
-          },
-          getListDB: () => {
+        },
+        getListDB: () => {
             try {
               return new Promise((resolve, reject) => {
                 Product.find()
@@ -72,8 +71,8 @@ function ProductController() {
             } catch (error) {
               console.log(error);
             }
-          },
-          getProductDetail: async (req, res) => {
+        },
+        getProductDetail: async (req, res) => {
             try {
               let productId = req.params?.id;
               let productInfo = await Product.findById(productId);
@@ -84,7 +83,7 @@ function ProductController() {
             } catch (error) {
               console.log(error);
             }
-          },
+        },
           editProduct: async (req, res) => {
             try {
               let data = req.body;
