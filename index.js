@@ -6,6 +6,7 @@ const home = require('./routes/home.js')
 const product = require('./routes/product.js')
 const account = require('./routes/account.js')
 const brand = require('./routes/brands.js')
+const promotion = require('./routes/promotion.js')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require("express-session")
@@ -30,8 +31,10 @@ app.use(
       resave: false,
     })
   );
-app.use('/product', product)
+app.use('/admin/product', product)
+app.use("/admin/promotion", promotion)
 app.use('/account', account)
+app.use('/admin/brand', brand)
 
 app.use(function(req, res, next) {
     res.locals.user = req.session.userId;
@@ -39,7 +42,6 @@ app.use(function(req, res, next) {
 });
 
   app.use('/', home)
-  app.use('/brand', brand)
 
 //Kiểm tra mongoodb được kết nối chưa
 mongoose 

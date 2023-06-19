@@ -13,7 +13,7 @@ const Promotion = mongoose.Schema(
     { versionKey: false, timestamps: true }
 );
 
-Promotion.stactics.objectId = function (id) {
+Promotion.statics.objectId = function (id) {
     return mongoose.Types.ObjectId(id);
 };
 

@@ -21,13 +21,13 @@ function BrandController() {
             console.log(error);
           }
           },
-          addBrand: (req, res) => {
+        addBrand: (req, res) => {
             try {
               let data = req.body;
               console.log(data);
               return Brand.create(data)
                 .then((rs) => {
-                  return res.redirect("/product/list");
+                  return res.redirect("/admin/brand/list");
                 })
                 .catch((err) => {
                   res.send({ s: 400, msg: err });
@@ -35,23 +35,15 @@ function BrandController() {
             } catch (error) {
               console.log(error);
             }
-          },
-          getListDB: () => {
-            try {
-              return new Promise((resolve, reject) => {
-                Brand.find()
-                  .then((rs) => {
-                    resolve(rs);
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    reject(err);
-                  });
-              });
-            } catch (error) {
-              console.log(error);
-            }
-          },
+        },
+        getListDB: () => {  
+          return Brand.find().lean().then((brandList) => {
+            return Promise.resolve(brandList)
+          })
+          .catch((error) =>{
+            console.log(error);
+          })
+        },
           getBrandDetail: async (req, res) => {
             try {
               let brandId = req.params?.id;

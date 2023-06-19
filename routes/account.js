@@ -18,7 +18,7 @@ router.get("/confirm", (req, res) => {
 });
 
 router.post("/register", UserController.register);
-router.post("/verifyUser", UserController.verify);
+router.post("/verify", UserController.verify);
 router.post("/login", UserController.login);
 router.post("/confirm", UserController.confirm);
 

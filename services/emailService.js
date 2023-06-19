@@ -5,11 +5,11 @@ function EmailService() {
     return {
         SendMailSG: (otp, emailCust) => {
             return new Promise((resolve, reject) => {
-                sgMail.setApiKey("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");
+                sgMail.setApiKey("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");
 
                 const msg = {
                     to: emailCust,
-                    from: "vothanhtri2k@gmail.com",
+                    from: "ndhieuvegia983@gmail.com",
                     subject: "Mã OTP register",
                     text: `Mã OTP của quý khách là: ${otp}`
                 };

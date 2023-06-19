@@ -109,7 +109,7 @@
                                         </li>
                                         <% for(var i=1; i <=3; i++) { %>
                                             <li class="page-item">
-                                                <a class="page-link" href="/product/list?page=<%= i %>">
+                                                <a class="page-link" href="/admin/product/list?page=<%= i %>">
                                                     <%= i %>
                                                 </a>
                                             </li>
@@ -164,7 +164,7 @@
                                     <button type="button" value="Upload File" name="submit" class="btn btn-primary"
                                         id="btnUploadImg">Upload</button>
                                 </form>
-                                <form class="row g-3" action="/product/add" method="post">
+                                <form class="row g-3" action="/admin/product/add" method="post">
                                     <div class="col-6">
                                         <img id="imgAdd" height="100px" width="100px" />
                                         <input type="hidden" class="form-control" name="img_prod" id="img_prod">
@@ -191,7 +191,7 @@
                                                 name="percent_prod" placeholder="Nhập giá sản phẩm">
                                         </div>
                                     </div>
-                                    <div class="col-6 ms-4">
+                                    <div class="col-12">
                                             <label for="des_prod" class="form-label">Mô tả sản phẩm</label>
                                             <textarea type="text" class="form-control" id="des_prod" name="des_prod"
                                                 placeholder="Thông tin sản phẩm"></textarea>
@@ -213,13 +213,13 @@
                 function editItem(productId) {
                     $.ajax({
                         type: "GET",
-                        url: `/product/detail/${productId}`,
+                        url: `/admin/product/detail/${productId}`,
                         success: function (rs) {
                             if (rs.s === 200) {
                                 let productInfo = rs.data;
                                 var formEdit = ` 
                     
-                                    <form class="row" action="/product/edit" method="post">
+                                    <form class="row" action="/admin/product/edit" method="post">
                                         <div>
                                         <input type="text" class="form-control" id="_id" name="_id" value="${productInfo._id}" style="display:none">
                                         </div>
@@ -245,11 +245,11 @@
                                             </div>
                                             <div class="col-md-6">
                                             <label for="percent_prod" class="form-label">Giảm</label>
-                                            <input type="text" class="form-control ps-3" id="percent_prod" name="percent_prod" placeholder="Nhập phần trăm giảm giá"
+                                            <input type="text" class="form-control ps-3" id="percent_prod" name="percent_prod" placeholder="Nhập % giảm giá"
                                                 value="${productInfo.percent_prod}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mt-4 ms-4">
+                                        <div class="col-12 mt-4">
                                         <label for="des_prod" class="form-label">Thông tin sản phẩm</label>
                                         <textarea type="text" class="form-control" id="des_prod" name="des_prod" placeholder="Thông tin sản phẩm">${productInfo.des_prod}</textarea>
                                         </div>
@@ -271,7 +271,7 @@
                 function deleteItem(productId) {
                     $.ajax({
                         type: "DELETE",
-                        url: `/product/delete/${productId}`,
+                        url: `/admin/product/delete/${productId}`,
                         success: function (rs) {
                             console.log(rs);
                             if (rs.s === 200) {

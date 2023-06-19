@@ -6,7 +6,7 @@ const ProductController = require('../controllers/producController.js');
 const UserController = require('../controllers/userController.js')
 
 
-router.use(UserController.checkLogin);
+// router.use(UserController.checkLogin);
 // router.get('/list', ProductController.getList);
 router.get("/list", (req, res) => {
     let page = req.query.page;

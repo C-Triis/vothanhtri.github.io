@@ -47,7 +47,7 @@ function ProductController() {
               console.log(data);
               return Product.create(data)
                 .then((rs) => {
-                  return res.redirect("/product/list");
+                  return res.redirect("/admin/product/list");
                 })
                 .catch((err) => {
                   res.send({ s: 400, msg: err });
@@ -95,7 +95,7 @@ function ProductController() {
               return Product.findByIdAndUpdate(productInfo._id, data)
                 .then((rs) => {
                   if (rs) {
-                    res.redirect("/product/list");
+                    res.redirect("/admin/product/list");
                   }
                 })
                 .catch((err) => {
@@ -107,7 +107,7 @@ function ProductController() {
           },
           DeleteProduct: async (req, res) => {
             try {
-              console.log("qưe");
+              console.log("req");
               const productId = req.params?.id;
               console.log(productId);
               const productInfo = await Product.findById(productId);
@@ -127,7 +127,6 @@ function ProductController() {
               console.log(error);
             }
           },
-          
     }
 }
 

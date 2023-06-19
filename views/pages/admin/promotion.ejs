@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head'); %>
+
+    <body>
+        <%-include('../../partials/header'); %>
+            <div class="container">
+                <div class="container mt-4">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+                        <div class="tm-bg-primary-dark tm-block tm-block-products">
+                            <div class="d-flex justify-content-between ">
+                                <h1>Danh sách sản phẩm</h1>
+                                <div class=" d-flex search">
+                                    <form action="">
+                                        <input type="search" name="keySearch" id="keySearch" placeholder="Search">
+                                        <button type="submit" class="btn-primary p-auto">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tm-product-table-container">
+                                <table class="table table-hover tm-table-small tm-product-table mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Tên Sự Kiện</th>
+                                            <th scope="col">Thời Gian Bắt Đầu</th>
+                                            <th scope="col">Thời Gian Kết Thúc</th>
+                                            <th scope="col">Sản Phẩm KM</th>
+                                            <th scope="col" colspan="2" class="text-center">Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% promotion.forEach(function(promotion, index) { %>
+                                            <tr>
+                                                <th scope="row" class="align-middle">
+                                                    <%= index+1 %>
+                                                </th>
+                                                <td class="align-middle">
+                                                    <%= promotion.promo_name %>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <%= promotion.start_date %>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <%= promotion.end_date %>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <%= promotion.productIds %>
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <span onclick='editItem("<%= promotion._id %>")' class="icon-cn"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <i class="fa-regular fa-pen-to-square"></i>
+                                                    </span>
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <span class="icon-cn" data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop<%= promotion._id %>">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <div class="modal fade" id="staticBackdrop<%= promotion._id %>"
+                                                tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Xóa
+                                                                sản
+                                                                phẩm</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Bạn có chắc xóa <%= promotion.promo_name %>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-12 modal-footer">
+                                                            <button onclick='deleteItem("<%= promotion._id %>")'
+                                                                class="btn btn-danger gap-2 col-3"
+                                                                data-bs-toggle="modal">Xóa</button>
+                                                            <button class="btn btn-secondary gap-2 col-3"
+                                                                data-bs-dismiss="modal">Hủy</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav aria-label="Page navigation example" class="mt-5">
+                                <ul class="pagination nav-add ">
+                                    <li>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#addPromotion">
+                                            Sự Kiện Khuyến Mãi Mới
+                                        </button>
+                                    </li>
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link prev" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <% for(var i=1; i <=3; i++) { %>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/product/list?page=<%= i %>">
+                                                    <%= i %>
+                                                </a>
+                                            </li>
+                                            <% }; %>
+                                                <li class="page-item next">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                    </ul>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal add Promotion  -->
+                <div class="modal fade" id="addPromotion" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Sự Kiện Mới</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="col-6">
+                                        <label for="promo_name" class="form-label">Tên Sự Kiện</label>
+                                        <input type="text" class="form-control ps-3" id="promo_name" name="promo_name"
+                                            placeholder="Nhập tên sản phẩm">
+                                    </div>
+                                    <div class="col-12 row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="start_date" class="form-label">Thời Gian Bắt Đầu</label>
+                                            <input type="datetime-local" class="form-control ps-3" id="start_date"
+                                                name="start_date" placeholder="Nhập giá sản phẩm">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="end_date" class="form-label">Thời Gian Kết Thúc</label>
+                                            <input type="datetime-local" class="form-control ps-3" id="end_date"
+                                                name="end_date" placeholder="Nhập giá sản phẩm">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                            <div class="col-md-12 mt-2 flex">
+                                                <form>
+                                                    <label for="" class="d-block">Sản Phẩm</label>
+                                                    <select class="selectpicker pt-2 form-control" multiple data-selected-text-format="count > 5"
+                                                        title="Chọn sản phẩm" data-width="100%" >
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="5">Four</option>
+                                                    <option value="6">Four</option>
+                                                    <option value="7">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    <option value="4">Four</option>
+                                                    </select>
+                                                </form>
+                                            </div>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label for="promo_des" class="form-label">Mô tả sản phẩm</label>
+                                        <textarea type="text" class="form-control" id="promo_des" name="promo_des"
+                                            placeholder="Thông tin sản phẩm"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal edit Promotion -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật thông tin sản phẩm</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formEdit" class="row mt-0"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+    <script>
+        // edit Promotion
+        function editItem(promotionId) {
+            $.ajax({
+                type: "GET",
+                url: `/admin/promotion/detail/${promotionId}`,
+                success: function(rs) {
+                    if(rs.s === 200) {
+                        let promotionInfo = rs.data;
+                        var formEdit =`
+                        <form class="row" action="/admin/promotion/edit" method="post">
+                            <div class="col-6">
+                                <label for="promo_name" class="form-label">Tên Sự Kiện</label>
+                                <input type="text" class="form-control ps-3" id="promo_name" name="promo_name"
+                                    placeholder="Nhập tên sự kiện" value="${promotionInfo.promo_name}">
+                            </div>
+                            <div class="col-6 mt-3">
+                                <div class="col-md-12">
+                                    <label for="start_date" class="form-label">Thời Gian Bắt Đầu</label>
+                                    <input type="datetime-local" class="form-control ps-3" id="start_date"
+                                        name="start_date" value="${promotionInfo.start_date}">
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="end_date" class="form-label">Thời Gian Kết Thúc</label>
+                                    <input type="datetime-local" class="form-control ps-3" id="end_date"
+                                        name="end_date" value="${promotionInfo.end_date}">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                 <div class="col-md-12">
+                                    <label for="productIds" class="form-label">Tên Hãng</label>
+                                    <input type="text" class="form-control ps-3" id="productIds"
+                                        name="productIds" placeholder="Nhập tên hãng" value="${promotionInfo.productIds}">
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="name_prod" class="form-label">Tên Sản Phẩm</label>
+                                    <input type="text" class="form-control ps-3" id="brandName" name="brandName"
+                                        placeholder="Nhập tên hãng" value="${promotionInfo.brandName}">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="promo_des" class="form-label">Mô tả sản phẩm</label>
+                                <textarea type="text" class="form-control" id="promo_des" name="promo_des"
+                                    placeholder="Thông tin sản phẩm" value="${promotionInfo.promo_des}"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                        `;
+                        $("#formEdit").html(formEdit);
+                    } else {
+                        alert(rs.msg)
+                    }
+                }
+            })
+        }
+
+        // delete Promotion
+        function deleteItem(promotionId) {
+            $.ajax({
+                type: "DELETE",
+                url: `/admin/promotion/delete/${promotionId}`,
+                success: function (rs) {
+                    if (rs.s === 200) {
+                        window.location.reload();
+                    } else {
+                        alert(rs.msg);
+                    }
+                },
+            });
+        }
+    </script>
+
+</html>

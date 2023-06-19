@@ -153,4 +153,5 @@ input:focus, input:valid {
 
 tr:nth-child(even) {
     background-color: #f1f1f1;
-  }
+}
+
