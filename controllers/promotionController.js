@@ -1,7 +1,8 @@
 "use strict"
 
-const { error } = require('console');
+const { error, log } = require('console');
 const Promotion = require('../models/promotion').Promotion
+const ProductController = require('../controllers/producController')
 
 function PromotionController() {
     const SELF = {
@@ -12,8 +13,11 @@ function PromotionController() {
             try {
                 let regex = new RegExp(keySearch);
                 return Promotion.find()
-                    .then((rs) => {
-                        return rs
+                    .then( async(rs) => {
+                        for(let i = 0, ii = rs.length; i < ii; i++) {
+                            let promoInfo = await  ProductController
+                          }
+                          return rs
                     })
                     .catch((error) => {
                         console.log(error);
@@ -107,7 +111,6 @@ function PromotionController() {
                 console.log(error);
             }
         },
-        
     }
 }
 

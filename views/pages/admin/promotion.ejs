@@ -132,6 +132,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <form class="row g-3" action="/admin/promotion/add" method="post">
                                     <div class="col-6">
                                         <label for="promo_name" class="form-label">Tên Sự Kiện</label>
                                         <input type="text" class="form-control ps-3" id="promo_name" name="promo_name"
@@ -150,40 +151,21 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                            <div class="col-md-12 mt-2 flex">
-                                                <form>
-                                                    <label for="" class="d-block">Sản Phẩm</label>
-                                                    <select class="selectpicker pt-2 form-control" multiple data-selected-text-format="count > 5"
-                                                        title="Chọn sản phẩm" data-width="100%" >
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="5">Four</option>
-                                                    <option value="6">Four</option>
-                                                    <option value="7">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    <option value="4">Four</option>
-                                                    </select>
-                                                </form>
-                                            </div>
+                                        <div class="col-md-12 mt-2 flex">
+                                            <label for="productIds" class="d-block">Sản Phẩm</label>
+                                            <select class="selectpicker pt-2 form-control" multiple
+                                                data-selected-text-format="count > 5" title="Chọn sản phẩm"
+                                                data-width="100%" data-actions-box="true" name="productIds"
+                                                id="productIds">
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                                <option value="4">Four</option>
+                                                <option value="5">Four</option>
+                                                <option value="6">Four</option>
+                                                <option value="7">Four</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-12 mt-2">
                                         <label for="promo_des" class="form-label">Mô tả sản phẩm</label>
@@ -224,10 +206,10 @@
             $.ajax({
                 type: "GET",
                 url: `/admin/promotion/detail/${promotionId}`,
-                success: function(rs) {
-                    if(rs.s === 200) {
+                success: function (rs) {
+                    if (rs.s === 200) {
                         let promotionInfo = rs.data;
-                        var formEdit =`
+                        var formEdit = `
                         <form class="row" action="/admin/promotion/edit" method="post">
                             <div class="col-6">
                                 <label for="promo_name" class="form-label">Tên Sự Kiện</label>
