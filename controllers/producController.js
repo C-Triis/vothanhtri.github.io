@@ -107,9 +107,7 @@ function ProductController() {
           },
           DeleteProduct: async (req, res) => {
             try {
-              console.log("req");
               const productId = req.params?.id;
-              console.log(productId);
               const productInfo = await Product.findById(productId);
               if (!productInfo) {
                 return res.json({ s: 404, msg: "Product not found" });

@@ -14,9 +14,6 @@ function PromotionController() {
                 let regex = new RegExp(keySearch);
                 return Promotion.find()
                     .then( async(rs) => {
-                        for(let i = 0, ii = rs.length; i < ii; i++) {
-                            let promoInfo = await  ProductController
-                          }
                           return rs
                     })
                     .catch((error) => {
