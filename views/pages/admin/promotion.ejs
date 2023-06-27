@@ -10,12 +10,7 @@
                         <div class="tm-bg-primary-dark tm-block tm-block-products">
                             <div class="d-flex justify-content-between ">
                                 <h1>Danh sách sản phẩm</h1>
-                                <div class=" d-flex search">
-                                    <form action="">
-                                        <input type="search" name="keySearch" id="keySearch" placeholder="Search">
-                                        <button type="submit" class="btn-primary p-auto">Search</button>
-                                    </form>
-                                </div>
+
                             </div>
                             <div class="tm-product-table-container">
                                 <table class="table table-hover tm-table-small tm-product-table mt-4">
@@ -157,13 +152,11 @@
                                                 data-selected-text-format="count > 5" title="Chọn sản phẩm"
                                                 data-width="100%" data-actions-box="true" name="productIds"
                                                 id="productIds">
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                                <option value="5">Four</option>
-                                                <option value="6">Four</option>
-                                                <option value="7">Four</option>
+                                                <% for(var i=0; i < list.length; i++) { %>
+                                                    <option value="<%= list[i]._id %>">
+                                                        <%= list[i].name_prod %>
+                                                    </option>
+                                                    <% } %>
                                             </select>
                                         </div>
                                     </div>
@@ -211,33 +204,32 @@
                         let promotionInfo = rs.data;
                         var formEdit = `
                         <form class="row" action="/admin/promotion/edit" method="post">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="promo_name" class="form-label">Tên Sự Kiện</label>
                                 <input type="text" class="form-control ps-3" id="promo_name" name="promo_name"
                                     placeholder="Nhập tên sự kiện" value="${promotionInfo.promo_name}">
                             </div>
-                            <div class="col-6 mt-3">
-                                <div class="col-md-12">
+                            <div class="col-12 row mt-3">
+                                <div class="col-md-6">
                                     <label for="start_date" class="form-label">Thời Gian Bắt Đầu</label>
                                     <input type="datetime-local" class="form-control ps-3" id="start_date"
                                         name="start_date" value="${promotionInfo.start_date}">
                                 </div>
-                                <div class="col-md-12 mt-2">
+                                <div class="col-md-6">
                                     <label for="end_date" class="form-label">Thời Gian Kết Thúc</label>
                                     <input type="datetime-local" class="form-control ps-3" id="end_date"
                                         name="end_date" value="${promotionInfo.end_date}">
                                 </div>
                             </div>
-                            <div class="col-6">
-                                 <div class="col-md-12">
-                                    <label for="productIds" class="form-label">Tên Hãng</label>
-                                    <input type="text" class="form-control ps-3" id="productIds"
-                                        name="productIds" placeholder="Nhập tên hãng" value="${promotionInfo.productIds}">
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <label for="name_prod" class="form-label">Tên Sản Phẩm</label>
-                                    <input type="text" class="form-control ps-3" id="brandName" name="brandName"
-                                        placeholder="Nhập tên hãng" value="${promotionInfo.brandName}">
+                            <div class="col-12">
+                                <div class="col-md-12 mt-2 flex">
+                                    <label for="productIds" class="d-block">Sản Phẩm</label>
+                                    <select class="selectpicker pt-2 form-control" multiple
+                                    data-selected-text-format="count > 5" title="Chọn sản phẩm"
+                                    data-width="100%" data-actions-box="true" name="productIds"
+                                        id="productIds">
+                                                <option >123</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">

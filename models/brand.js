@@ -5,11 +5,8 @@ const mongoose = require('mongoose');
 const Brand = mongoose.Schema(
     {
         brandName: { type: String },
-        img_prod: { type:String },
-        price_prod: { type: String },
-        percent_prod: { type: Number},
-        des_prod: { type: String },
-        name_prod:{type: String}
+        img_brand: { type:String },
+        des_brand: { type: String },
     },
     {versionKey: false, timestamps: true}
 );

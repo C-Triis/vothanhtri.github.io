@@ -2,6 +2,7 @@
 
 const { error, log } = require('console');
 const Promotion = require('../models/promotion').Promotion
+const Product = require('../models/product').Product
 const ProductController = require('../controllers/producController')
 
 function PromotionController() {
@@ -9,7 +10,7 @@ function PromotionController() {
         SIZE: 10,
     };
     return {
-        getList: (page, keySearch) => {
+        getList:  (page, keySearch) => {
             try {
                 let regex = new RegExp(keySearch);
                 return Promotion.find()
