@@ -176,9 +176,9 @@
                                     </div>
                                     <div class="col-6">
                                         <label for="brandId" class="form-label">Tên hãng</label>
-                                        <select name="brandId" id="brandId" class="form-control" aria-label="Default select example">
+                                        <select name="brandId" id="brandId" class="form-select">
                                             <% for(var i=0; i<brand.length; i++) { %>
-                                                <option value="<%= brand[i]._id %>"><%= brand[i].brandName %></option>
+                                                <option value="<%= brand[i]._id %>" selected><%= brand[i].brandName %></option>
                                             <% } %>
                                         </select>
                                     </div>
@@ -237,8 +237,11 @@
                                         </div>
                                         <div class="col-md-6 mt-4">
                                         <label for="brandName" class="form-label">Tên hãng</label>
-                                        <input type="text" class="form-control ps-3" id="brandName" name="brandName" placeholder="Nhập tên"
-                                            value="${productInfo.brandName}">
+                                        <select name="brandId" id="brandId" class="form-select" aria-label="Default select example">
+                                            <% for(var i=0; i<brand.length; i++) { %>
+                                                <option value="<%= brand[i]._id %>"><%= brand[i].brandName %></option>
+                                            <% } %>
+                                        </select>
                                         </div>
                                         <div class="col-md-6 mt-4 row">
                                            <div class="col-md-6">

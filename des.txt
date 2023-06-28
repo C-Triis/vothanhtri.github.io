@@ -32,4 +32,26 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         yourDate = new Date()
       let time = SELF.getTimeISO(yourDate)
       return SELF.chunkSubstr('' + time, 2).join(':')
-    },
+    },''
+
+
+
+    for (let i = 0, ii = rs.length; i < ii; i++) {
+              console.log(
+                dateService.getStrDate("DD/MM/YYYY", new Date(rs[i].startDate))
+              );
+              rs[i].startDate = `${dateService.getStrDate(
+                "DD/MM/YYYY",
+                new Date(rs[i].startDate)
+              )} ${dateService.getStrTime(
+                "SS:MM:HH",
+                new Date(rs[i].startDate)
+              )}`;
+              rs[i].endDate = `${dateService.getStrDate(
+                "DD/MM/YYYY",
+                new Date(rs[i].endDate)
+              )} ${dateService.getStrTime(
+                "SS:MM:HH",
+                new Date(rs[i].endDate)
+              )}`;
+            }
