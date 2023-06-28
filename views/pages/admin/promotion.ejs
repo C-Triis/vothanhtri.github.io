@@ -24,20 +24,20 @@
                                             <th scope="col" colspan="2" class="text-center">Chức năng</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody >
                                         <% promotion.forEach(function(promotion, index) { %>
                                             <tr>
                                                 <th scope="row" class="align-middle">
                                                     <%= index+1 %>
                                                 </th>
-                                                <td class="align-middle">
+                                                <td class="align-middle ">
                                                     <%= promotion.promo_name %>
                                                 </td>
-                                                <td class="align-middle">
-                                                    <%= promotion.start_date %>
+                                                <td class="align-middle ">
+                                                    <%= promotion.start %>
                                                 </td>
-                                                <td class="align-middle">
-                                                    <%= promotion.end_date %>
+                                                <td class="align-middle ">
+                                                    <%= promotion.end %>
                                                 </td>
                                                 <td class="align-middle text_js">
                                                     <%= promotion.productList %>
