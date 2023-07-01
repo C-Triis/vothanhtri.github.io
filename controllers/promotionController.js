@@ -71,12 +71,14 @@ function PromotionController() {
                 let data = req.body;
                 let promotionInfo = await Promotion.findById(data?._id);
                 if (!promotionInfo) {
-                    return res.json({ s: 400, msg: "Promotion not found" });
+                    return res.json({ s: 404, msg: "Promotion not found" });
                 }
                 delete data._id;
                 return Promotion.findByIdAndUpdate(promotionInfo._id, data)
                     .then((rs) => {
-                        res.redirect("/admin/promotion/list");
+                        if(rs){
+                            res.redirect("/admin/promotion/list");
+                        }
                     })
                     .catch((error) => {
                         console.log(error);

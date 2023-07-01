@@ -36,6 +36,7 @@ router.get("/list", (req, res) => {
             "SS:MM:HH",
             new Date(rs[0][i].end_date)
           )}`
+          console.log(rs[0][i]['productList']);
         }
         res.render("pages/admin/promotion", {
             promotion: rs[0],
