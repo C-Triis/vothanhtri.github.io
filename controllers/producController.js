@@ -1,7 +1,7 @@
 "use strict";
 
 const { error } = require('console');
-const brandController = require('./brandController.js');
+const BrandController = require('./brandController');
 
 const Product = require('../models/product.js').Product
 
@@ -18,6 +18,10 @@ function ProductController() {
           .skip(skip)
           .limit(SELF.SIZE)
           .then(async(rs) => {
+            for(let i = 0, ii = rs.length; i < ii; i++) {
+              let brandInfo = await  BrandController.getBrandById(rs[i].brandId)
+              rs[i]['brandName'] = brandInfo.brandName;
+            }
             return rs
           })
           .catch((error) => {
