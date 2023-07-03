@@ -5,6 +5,7 @@ const router = express.Router({});
 const PromotionController = require('../controllers/promotionController');
 const ProductController = require('../controllers/producController')
 const Product = require('../models/product').Product
+const Promotion = require('../models/promotion').Promotion
 const DateServices = require('../services/date')
 
 router.get("/list", (req, res) => {
@@ -17,30 +18,32 @@ router.get("/list", (req, res) => {
         PromotionController.getList(page, keySearch),
         Product.find().lean()
     ]).then(async rs => {
-        for(let i=0, ii=rs[0].length;i<ii; i++) {
-            let productIds=rs[0][i].productIds
+      let Promotion = rs[0]
+      let Products = rs[1]
+        for(let i=0, ii=Promotion.length;i<ii; i++) {
+            let productIds=Promotion[i].productIds
            let products =await Product.find({_id: {$in: productIds}}).lean()
+           Products[i]['promo'] = Promotion.indexOf(Products[i]._id.toString())  > -1 ? true : false
            let productList = products.map(product => product.name_prod)
-           rs[0][i]['productList'] = productList.join(', ')
-           rs[0][i]['start'] =`${DateServices.getStrDate(
+           Promotion[i]['productList'] = productList.join(', ')
+           Promotion[i]['start'] =`${DateServices.getStrDate(
             "DD/MM/YYYY",
-            new Date(rs[0][i].start_date)
+            new Date(Promotion[i].start_date)
           )} ${DateServices.getStrTime(
             "SS:MM:HH",
-            new Date(rs[0][i].start_date)
+            new Date(Promotion[i].start_date)
           )}`
-          rs[0][i]['end'] =`${DateServices.getStrDate(
+          Promotion[i]['end'] =`${DateServices.getStrDate(
             "DD/MM/YYYY",
-            new Date(rs[0][i].end_date)
+            new Date(Promotion[i].end_date)
           )} ${DateServices.getStrTime(
             "SS:MM:HH",
-            new Date(rs[0][i].end_date)
+            new Date(Promotion[i].end_date)
           )}`
-          console.log(rs[0][i]['productList']);
         }
         res.render("pages/admin/promotion", {
-            promotion: rs[0],
-            list: rs[1]
+            Promotion: rs[0],
+            Products: rs[1]
         })
     })
 });

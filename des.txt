@@ -55,3 +55,128 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 new Date(rs[i].endDate)
               )}`;
             }
+
+
+
+
+
+            getPromotionDetail: async (req, res) => {
+            try {
+                let promotionId = req.params?.id;
+                return Promise.all([
+                    Promotion.findById(promotionId).lean(),
+                    Product.find().lean()
+                ]).then(rs => {
+                    if (!rs[0]) {
+                        return res.json({ s: 404, msg: "Promotion not found" });
+                    }
+                    let promotionInfo = rs[0], products = rs[1]
+                    for (let i = 0, ii = products.length; i < ii; i++) {
+                        products[i]['isExist'] = promotionInfo.productIDs.indexOf(products[i]._id.toString()) > -1 ? true : false
+                    }
+                    return res.json({ s: 200, data: { prom: promotionInfo, products: products } });
+                }).catch(e => {
+                    console.log(e);
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        },
+bên controller nha a
+
+<% products.forEach(function(item, index) { %>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" name="productIDs"
+                                                            value="<%=item._id %>" type="checkbox">
+                                                        <label class="form-check-label">
+                                                            <%= item.Name %>
+                                                        </label>
+                                                    </div>
+                                                    <% }); %>
+
+phần này là duyệt qua mảng để lấy id product
+
+
+function editItem(promotetId) {
+            $.ajax({
+                type: "GET",
+                url: `/admin/promotion/detail/${promotetId}`,
+                success: function (rs) {
+                    if (rs.s === 200) {
+                        let promotionInfo = rs.data.prom;
+                        let productList = rs.data.products;
+                        let showProductActive = ``
+                        productList.forEach(function (item, index) {
+                            showProductActive += `
+                            <div class="col-12">
+                            <label class="form-check-label">
+                                ${item.Name}
+                            </label>`
+                            if (item.isExist) {
+                                showProductActive += `<input class="form-check-input" name="productIDs" value="${item._id}" type="checkbox" checked>`
+                            } else {
+                                showProductActive += `<input class="form-check-input" name="productIDs" value="${item._id}" type="checkbox">`
+                            }
+                            showProductActive += `</div>`
+                        })
+                        var formEdit = `
+                            <form class="row g-3" action="/admin/promotion/edit" method="post">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Mã khuyến mãi</label>
+                                    <input type="text" class="form-control" id="promoteCode"
+                                        name="promoteCode" placeholder="Nhập mã khuyến mãi"
+                                        value="${promotionInfo.promoteCode}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Discount</label>
+                                    <input type="number" class="form-control" id="Discount"
+                                        name="Discount" placeholder="Nhập trị giá"
+                                        value="${promotionInfo.Discount}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="age" class="form-label">Mô tả</label>
+                                    <input type="text" class="form-control" id="Description"
+                                        name="Description" placeholder="Nhập mô tả"
+                                        value="${promotionInfo.Description}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="age" class="form-label">startDate</label>
+                                    <input type="date" class="form-control" id="startDate"
+                                    name="startDate" placeholder="Nhập ngày kết thúc"
+                                        value="${moment(promotionInfo.startDate).format('YYYY-MM-DD')}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="age" class="form-label">endDate</label>
+                                    <input type="date" class="form-control" id="endDate"
+                                        name="endDate" placeholder="Nhập ngày kết thúc"
+                                        value="${moment(promotionInfo.endDate).format('YYYY-MM-DD')}">
+                                </div>
+                                <div class="col-md-12">
+                                <label  class="form-label">Danh sách sản phẩm</label>
+                                <div class="form-check row">
+                                        ${showProductActive}
+                                </div>
+                                </div>
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer col-12">
+                                                                <div>
+                                                                <input type="text" class="form-control" id="_id"
+                                                                    name="_id" value="${promotionInfo._id}"
+                                                                    style="display:none">
+                                                                </div>
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal">Đóng</button>
+                                                                <button type="submit" class="btn btn-primary">Cập
+                                                                    nhật</button>
+                                                            </div>
+                                                        </form>
+                                    `;
+                        $("#formEdit").html(formEdit);
+                    } else {
+                        alert(rs.msg);
+                    }
+                },
+            });
+        }
+
+phần này lấy ajax của hàm bên controller nãy nha a
