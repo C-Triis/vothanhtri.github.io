@@ -1,6 +1,7 @@
 "use strict"
 
 const Promotion = require('../models/promotion').Promotion
+const Product = require('../models/product').Product
 
 
 function PromotionController() {
@@ -56,11 +57,20 @@ function PromotionController() {
         getPromotionDetail: async (req, res) => {
             try {
                 let promotionId = req.params?.id;
-                let promotionInfo = await Promotion.findById(promotionId);
-                if (!promotionInfo) {
-                    return res.json({ s: 404, msg: "Promotion not found" })
-                }
-                return res.json({ s: 200, data: promotionInfo })
+                return Promise.all([
+                    Promotion.findById(promotionId).lean(),
+                    Product.find().lean()
+                ]).then( rs => {
+                    if(!rs[0]){
+                        return res.json({ s: 404, msg: 'Promotion not found'})
+                    };
+                    let promotionInfo = rs[0], products = rs[1]
+                    for (let i = 0, ii = products.length; i < ii; i++) {
+                        products[i]['isExist'] = promotionInfo.productIds.indexOf(products[i]._id.toString()) > -1 ? true : false
+                    }
+                    return res.json({ s: 200, data: { promo: promotionInfo, products: products } });
+                })
+                
             }
             catch (error) {
                 console.log(error);

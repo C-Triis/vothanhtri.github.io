@@ -25,37 +25,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% Promotion.forEach(function(Promotion, index) { %>
+                                        <% Promotion.forEach(function(promotion, index) { %>
                                             <tr>
                                                 <th scope="row" class="align-middle">
                                                     <%= index+1 %>
                                                 </th>
                                                 <td class="align-middle ">
-                                                    <%= Promotion.promo_name %>
+                                                    <%= promotion.promo_name %>
                                                 </td>
                                                 <td class="align-middle ">
-                                                    <%= Promotion.start %>
+                                                    <%= promotion.start %>
                                                 </td>
                                                 <td class="align-middle ">
-                                                    <%= Promotion.end %>
+                                                    <%= promotion.end %>
                                                 </td>
                                                 <td class="align-middle text_js">
-                                                    <%= Promotion.productList %>
+                                                    <%= promotion.productList %>
                                                 </td>
                                                 <td class="text-center align-middle">
-                                                    <span onclick='editItem("<%= Promotion._id %>")' class="icon-cn"
+                                                    <span onclick='editItem("<%= promotion._id %>")' class="icon-cn"
                                                         data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                         <i class="fa-regular fa-pen-to-square"></i>
                                                     </span>
                                                 </td>
                                                 <td class="text-center align-middle">
                                                     <span class="icon-cn" data-bs-toggle="modal"
-                                                        data-bs-target="#staticBackdrop<%= Promotion._id %>">
+                                                        data-bs-target="#staticBackdrop<%= promotion._id %>">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </span>
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="staticBackdrop<%= Promotion._id %>"
+                                            <div class="modal fade" id="staticBackdrop<%= promotion._id %>"
                                                 tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -67,11 +67,11 @@
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Bạn có chắc xóa <%= Promotion.promo_name %>
+                                                            <p>Bạn có chắc xóa <%= promotion.promo_name %>
                                                             </p>
                                                         </div>
                                                         <div class="col-12 modal-footer">
-                                                            <button onclick='deleteItem("<%= Promotion._id %>")'
+                                                            <button onclick='deleteItem("<%= promotion._id %>")'
                                                                 class="btn btn-danger gap-2 col-3"
                                                                 data-bs-toggle="modal">Xóa</button>
                                                             <button class="btn btn-secondary gap-2 col-3"
@@ -148,15 +148,15 @@
                                     <div class="col-12">
                                         <div class="col-md-12 mt-2">
                                             <label for="productIds" class="d-block">Sản Phẩm</label>
-                                            <% Products.forEach(function(product, index) { %>
+                                            <% Products.forEach(function(item, index) { %>
                                                 <div class="form-check">
                                                     <input class="form-check-input" name="productIDs"
-                                                        value="<%=product._id %>" type="checkbox">
+                                                        value="<%=item._id %>" type="checkbox">
                                                     <label class="form-check-label">
-                                                        <%= product.name_prod %>
+                                                        <%= item.name_prod %>
                                                     </label>
                                                 </div>
-                                            <% }); %>
+                                                <% }); %>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-2">
@@ -203,28 +203,34 @@
                         url: `/admin/promotion/detail/${promotionId}`,
                         success: function (rs) {
                             if (rs.s === 200) {
-                                let promotionInfo = rs.data;
-                                let showProd = ``;
+                                let promotionInfo = rs.data.promo;
+                                console.log(promotionInfo);
+                                let productList = rs.data.products;
                                 promotionInfo['start_date'] = setValue(promotionInfo['start_date'])
                                 promotionInfo['end_date'] = setValue(promotionInfo['end_date'])
-                                promotionInfo.Products.forEach(function (item, index) {
-                                    showProd += `
-                                        <div class="col-12">
-                                        <label class="form-check-label">
-                                            ${item.name_prod}
-                                        </label>`
-                                    if (item.promo) {
-                                        showProd += `<input class="form-check-input" name="productIds" value="${item._id}" type="checkbox" checked>`
+                                let showProductActive = ``
+                                productList.forEach(function (item, index) {
+                                    showProductActive += `
+                                    <div class="col-12">
+                                    `
+                                    if (item.isExist) {
+                                        showProductActive += `<input class="form-check-input" name="productIds" value="${item._id}" type="checkbox" checked>`
                                     } else {
-                                        showProd += `<input class="form-check-input" name="productIds" value="${item._id}" type="checkbox">`
+                                        showProductActive += `<input class="form-check-input" name="productIds" value="${item._id}" type="checkbox">`
                                     }
-                                    showProd += `</div>`
+                                    showProductActive += `
+                                    <label class="form-check-label ps-2">
+                                        ${item.name_prod}
+                                    </label>
+                                    </div>`
                                 })
                                 var formEdit = `
                                 <form class="row" action="/admin/promotion/edit" method="POST">
                                     <div>
-                                        <input type="text" class="form-control" id="_id" name="_id" value="${promotionInfo._id}" style="display:none">
-                                        </div>
+                                                                <input type="text" class="form-control" id="_id"
+                                                                    name="_id" value="${promotionInfo._id}"
+                                                                    style="display:none">
+                                    </div>
                                     <div class="col-12">
                                         <label for="promo_name" class="form-label">Tên Sự Kiện</label>
                                         <input type="text" class="form-control ps-3" id="promo_name" name="promo_name"
@@ -244,9 +250,7 @@
                                     </div>
                                     <div class="col-12 mt-2">
                                         <label for="productIds" class="d-block mb-2">Sản Phẩm</label>
-                                        <div class="form-check row">
-                                            ${showProd}
-                                        </div>
+                                        ${showProductActive}
                                     </div>
                                     <div class="col-12">
                                         <label for="promo_des" class="form-label">Mô tả sản phẩm</label>
