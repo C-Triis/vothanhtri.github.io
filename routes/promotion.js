@@ -1,11 +1,8 @@
 "use strict";
-
 const express = require('express');
 const router = express.Router({});
 const PromotionController = require('../controllers/promotionController');
-const ProductController = require('../controllers/producController')
 const Product = require('../models/product').Product
-const Promotion = require('../models/promotion').Promotion
 const DateServices = require('../services/date')
 
 router.get("/list", (req, res) => {

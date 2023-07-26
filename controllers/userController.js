@@ -45,6 +45,7 @@ function UserController() {
           emailService.SendMailSG(otp,data?.email).then(()=>{
             return User.create({
               username: data?.username,
+              email: data?.email,
               password: hash,
               otp: otp,
             })
@@ -70,6 +71,8 @@ function UserController() {
           return res.json({ s: 400, msg: "Vui long nhap OTP" });
         }
         const emailLocalStorage = await localStorage.getItem("email");
+        console.log(data.otp);
+        console.log(emailLocalStorage);
         return User.findOne({ otp: data?.otp, email: emailLocalStorage })
           .lean()
           .then(async (userInfo) => {
@@ -117,8 +120,9 @@ function UserController() {
               userInfo.token = token;
               await User.updateOne({ _id: userInfo._id }, userInfo);
               let session = req.session;
-              session.userId = token;
-              res.redirect("/product/list");
+              session.token = token;
+              session.userId = userInfo._id
+              res.redirect("/");
             } else {
               res.json({ s: 400, msg: "Password khong chinh xac" });
             }

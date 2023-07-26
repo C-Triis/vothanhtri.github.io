@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router({});
-const ProductController = require('../controllers/producController.js');
+const ProductController = require('../controllers/productController.js');
 // const UserController = require('../controllers/userController.js');
 const multer = require("multer");
 const fileService = require('../services/fileService.js');
@@ -24,6 +24,10 @@ router.get("/", (req, res) => {
       })
   })
 });
+router.get("/chart", (req, res) => {
+      res.render("pages/auth/chart.ejs", {
+      })
+});
 
 // router.get("/register", (req, res) => {
 //   res.render("pages/admin/register");
@@ -31,9 +35,7 @@ router.get("/", (req, res) => {
 // router.get("/verifyUser", (req, res) => {
 //   res.render("pages/admin/verify");
 // });
-// router.get("/login", (req, res) => {
-//   res.render("pages/admin/login");
-// });
+
 // router.get("/confirm", (req, res) => {
 //   res.render("pages/admin/reset");
 // });

@@ -7,7 +7,7 @@ const Product = mongoose.Schema(
         name_prod: { type: String },
         img_prod: { type:String },
         price_prod: { type: String },
-        percent_prod: { type: String},
+        percent_prod: { type: Number},
         des_prod: { type: String },
         brandId: {type: Object }
     },
@@ -20,5 +20,6 @@ Product.statics.objectId = function(id) {
 
 //xuất product
 module.exports = {
-    Product: mongoose.model("product", Product)
+    Product: mongoose.model("product", Product),
+    
 };

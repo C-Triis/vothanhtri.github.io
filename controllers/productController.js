@@ -1,6 +1,5 @@
 "use strict";
 
-const { error } = require('console');
 const BrandController = require('./brandController');
 
 const Product = require('../models/product.js').Product
@@ -129,6 +128,14 @@ function ProductController() {
       } catch (error) {
         console.log(error);
       }
+    },
+    getProductById: (prodId) => {
+      return Product.findById(prodId).then(rs => {
+        return Promise.resolve(rs)
+      })
+      .catch(e => {
+        console.log(e);
+      })
     },
   }
 }

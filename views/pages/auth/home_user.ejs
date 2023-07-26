@@ -12,7 +12,8 @@
                         <img src="https://intphcm.com/data/upload/poster-giay-den.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://intphcm.com/data/upload/poster-quang-cao-giay.jpg" class="d-block w-100" alt="...">
+                        <img src="https://intphcm.com/data/upload/poster-quang-cao-giay.jpg" class="d-block w-100"
+                            alt="...">
                     </div>
                     <div class="carousel-item">
                         <img src="https://intphcm.com/data/upload/poster-giay-bien.jpg" class="d-block w-100" alt="...">
@@ -66,20 +67,32 @@
                             <div class="product mb-5">
                                 <div class="img_pro">
                                     <a href="#">
-                                        <span class="sale"><%= product.percent_prod %></span>
-                                        <span class="sale_01">Sale</span>
-                                        <img src="<%= product.img_prod %>"
-                                            alt="" class="img-represent">
+                                       <% if(product.percent_prod > 0) { %>
+                                        <span class="sale">
+                                            <%= product.percent_prod %>%
+                                        </span>
+                                        <% } else { %>
+                                            <span class="sale" style="display: none;">
+                                                <%= product.percent_prod %>
+                                            </span>
+                                        <% } %>
+                                        <% if(product.percent_prod > 0) { %>
+                                            <span class="sale_01">Sale</span>
+                                            <% } else { %>
+                                                <span class="sale_01" style="display: none;">Sale</span>
+                                            <% } %>
+                                        <img src="<%= product.img_prod %>" alt="" class="img-represent">
                                         <span class="icon_pro_left">
                                             <i class="fa-solid fa-heart"></i>
-                                            <i class="fa-solid fa-eye"></i>
+                                            <i class="fa-solid fa-eye"
+                                                onclick="deleteCart('<%= product._id %>')"></i>
                                         </span>
                                         <span class="icon_pro_right">
                                             <i class="fa-sharp fa-solid fa-bars-staggered"></i>
-                                            <i class="fa-solid fa-cart-shopping"></i>
+                                            <i class="fa-solid fa-cart-shopping"
+                                                onclick="addCart('<%= product._id %>')"></i>
                                         </span>
-                                        <img src="<%= product.img_prod %>"
-                                            alt="" class="img_hover">
+                                        <img src="<%= product.img_prod %>" alt="" class="img_hover">
                                     </a>
                                 </div>
                                 <div class="reviwes_pro">
@@ -92,9 +105,13 @@
                                     </div>
                                     <div class="name_pro">
                                         <a href="#">
-                                            <h4> <%= product.name_prod %> </h4>
+                                            <h4>
+                                                <%= product.name_prod %>
+                                            </h4>
                                             <p class="price">Hãng: <%= product.brandName %></p>
-                                            <p class="price"><%= product.price_prod %></p>
+                                            <p class="price">
+                                                Giá: $<%= product.price_prod %>
+                                            </p>
                                         </a>
                                     </div>
                                 </div>
@@ -190,7 +207,24 @@
                         }
                     }
 
-
+                    function addCart(cid) {
+                        $.ajax({
+                            type: "POST",
+                            url: `/cart/add?productId=${cid}`,
+                            // success: function (rs) {
+                            //     alert(rs.msg)
+                            // }
+                        })
+                    }
+                    function deleteCart(cid) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: `/cart/delete?productId=${cid}`,
+                            // success: function (rs) {
+                            //     alert(rs.msg)
+                            // }
+                        })
+                    }
                 </script>
     </body>
 

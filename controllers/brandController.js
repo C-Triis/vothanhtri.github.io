@@ -67,7 +67,7 @@ function BrandController() {
         return Brand.findByIdAndUpdate(brandInfo._id, data)
           .then((rs) => {
             if (rs) {
-              res.redirect("/brand/list");
+              res.redirect("/admin/brand/list");
             }
           })
           .catch((err) => {

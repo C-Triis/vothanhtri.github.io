@@ -7,6 +7,7 @@ const product = require('./routes/product.js')
 const account = require('./routes/account.js')
 const brand = require('./routes/brands.js')
 const promotion = require('./routes/promotion.js')
+const cart = require('./routes/cart.js')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require("express-session")
@@ -36,12 +37,14 @@ app.use("/admin/promotion", promotion)
 app.use('/account', account)
 app.use('/admin/brand', brand)
 
+
 app.use(function(req, res, next) {
     res.locals.user = req.session.userId;
     next();
 });
 
-  app.use('/', home)
+app.use('/', home)
+app.use('/', cart)
 
 //Kiểm tra mongoodb được kết nối chưa
 mongoose 

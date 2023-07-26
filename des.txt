@@ -180,3 +180,43 @@ function editItem(promotetId) {
         }
 
 phần này lấy ajax của hàm bên controller nãy nha a
+
+
+
+// let cartDetail = await Product.findById(cartId);
+                // console.log(cartDetail);
+                // if (!cartDetail) {
+                //     return res.json({ s: 404, msg: 'lỗi addCart "Not found"' })
+                // }
+                // let upQuantity = await Number.parseInt(cartDetail.quantity + 1);
+                // return Cart.findByIdAndUpdate(cartDetail._id,)
+                //     .then(rs => {
+                //         return res.json({ s: 200, msg: 'Thêm hàng thành công' })
+                //     })
+                //     .catch(e => {
+                //         console.log(e);
+                //     })
+
+
+                <tr>
+                        <td>
+                            <div class="product-item">
+                                <a class="product-thumb" href="#"><img
+                                        src="https://www.bootdey.com/image/220x180/FF0000/000000" alt="Product"></a>
+                                <div class="product-info">
+                                    <h4 class="product-title"><a href="#">Unionbay Park</a></h4><span><em>Size:</em>
+                                        10.5</span><span><em>Color:</em> Dark Blue</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="count-input">
+                                <span class="icon_user"><i class="bi bi-dash-circle"></i></span><span class="px-md-3 px-1 icon_user">2</span><span class="icon_user"><i class="bi bi-plus-circle"></i></span>
+                            </div>
+                        </td>
+                        <td class="text-center text-lg text-medium">$43.90</td>
+                        <td class="text-center text-lg text-medium">$18.00</td>
+                        <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title=""
+                                data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
+                    </tr>
+                </tbody>

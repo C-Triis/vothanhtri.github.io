@@ -11,6 +11,7 @@ const User = mongoose.Schema(
     active: { type: Boolean, default: false },
     otp: { type: String },
     token: { type: String },
+    inforUser: { type: Array },
   },
   { versionKey: false, timestamps: true }
 );
