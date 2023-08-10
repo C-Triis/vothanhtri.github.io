@@ -60,6 +60,7 @@ function BrandController() {
       try {
         let data = req.body;
         let brandInfo = await Brand.findById(data?._id);
+        console.log(data);
         if (!brandInfo) {
           return res.json({ s: 404, msg: "Brand not found" });
         }

@@ -7,136 +7,208 @@
 
         <%- include('../../partials/header_user.ejs'); %>
             <div class="row container-fluid mtop mb-5">
-                <div class="padding-bottom-3x mb-1 col-8">
-                    <!-- Shopping Cart-->
-                    <div class="table-responsive shopping-cart">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th class="text-center">Quantity</th>
-                                    <th class="text-center">Subtotal</th>
-                                    <th class="text-center">Discount</th>
-                                    <th class="text-center">Delete Product</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% product.forEach(function(item) { %>
+                <% if(sumPrice === 0) { %>
+                    <div class="padding-bottom-3x mb-1 col-12 px-5">
+                        <!-- Shopping Cart-->
+                        <div class="table-responsive shopping-cart">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <div class="product-item">
-                                                <a class="product-thumb" href="#"><img src="<%= item.productImg %>"
-                                                        alt="Product"></a>
-                                                <div class="product-info">
-                                                    <h4 class="product-title"><a href="#">
-                                                            <%= item.productName %>
-                                                        </a></h4>
-                                                    <span>
-                                                        <span>Size:</em>10.5</span>
-                                                        <span><em>Color:</em> Dark Blue</span>
+                                        <th>Product Name</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Subtotal</th>
+                                        <th class="text-center">Discount</th>
+                                        <th class="text-center">Delete Product</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% product.forEach(function(item) { %>
+                                        <tr>
+                                            <td>
+                                                <div class="product-item">
+                                                    <a class="product-thumb" href="#"><img src="<%= item.productImg %>"
+                                                            alt="Product"></a>
+                                                    <div class="product-info">
+                                                        <h4 class="product-title"><a href="#">
+                                                                <%= item.productName %>
+                                                            </a></h4>
+                                                        <span>
+                                                            <span>Size:</em>10.5</span>
+                                                            <span><em>Color:</em> Dark Blue</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="count-input">
+                                                    <span class="icon_user" onclick="deleteCart('<%= item.productId %>')"><i
+                                                            class="bi bi-dash-circle"></i>
+                                                    </span>
+                                                    <span class="px-md-3 px-1 icon_user">
+                                                        <%= item.quantity %>
+                                                    </span>
+                                                    <span class="icon_user" onclick="addCart('<%= item.productId %>')"><i
+                                                            class="bi bi-plus-circle"></i>
                                                     </span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="count-input">
-                                                <span class="icon_user" onclick="deleteCart('<%= item.productId %>')"><i
-                                                        class="bi bi-dash-circle"></i>
-                                                </span>
-                                                <span class="px-md-3 px-1 icon_user">
-                                                    <%= item.quantity %>
-                                                </span>
-                                                <span class="icon_user" onclick="addCart('<%= item.productId %>')"><i
-                                                        class="bi bi-plus-circle"></i>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="text-center text-lg text-medium">
-                                            $ <%= item.productPrice * item.quantity %>
-                                        </td>
-                                        <td class="text-center text-lg text-medium">$<%= (item.productPrice *
-                                                item.quantity * item.productPercent).toFixed(2) %>
-                                        </td>
-                                        <td class="text-center"><a class="remove-from-cart" href="#"
-                                                data-toggle="tooltip" title="" data-original-title="Remove item"><i
-                                                    class="fa fa-trash" onclick="deleteAll('<%= item._id %>')"></i></a>
-                                        </td>
+                                            </td>
+                                            <td class="text-center text-lg text-medium">
+                                                $ <%= item.productPrice * item.quantity %>
+                                            </td>
+                                            <td class="text-center text-lg text-medium">$<%= (item.productPrice *
+                                                    item.quantity * item.productPercent).toFixed(2) %>
+                                            </td>
+                                            <td class="text-center"><a class="remove-from-cart" href="#"
+                                                    data-toggle="tooltip" title="" data-original-title="Remove item"><i
+                                                        class="fa fa-trash" onclick="deleteAll('<%= item._id %>')"></i></a>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                                <% }) %>
+                            </table>
+                        </div>
+                        <div class="shopping-cart-footer">
+                            <div class="column"><a class="btn btn-outline-secondary" href="/"><i
+                                        class="icon-arrow-left"></i>&nbsp;Back
+                                    to Shopping</a></div>
+                            <div class="column text-lg">TotalPrice: <span class="text-medium">$<%= sumPrice %></span></div>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="padding-bottom-3x mb-1 col-8">
+                        <!-- Shopping Cart-->
+                        <div class="table-responsive shopping-cart">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Subtotal</th>
+                                        <th class="text-center">Discount</th>
+                                        <th class="text-center">Delete Product</th>
                                     </tr>
-                            </tbody>
-                            <% }) %>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <% product.forEach(function(item) { %>
+                                        <tr>
+                                            <td>
+                                                <div class="product-item">
+                                                    <a class="product-thumb" href="#"><img src="<%= item.productImg %>"
+                                                            alt="Product"></a>
+                                                    <div class="product-info">
+                                                        <h4 class="product-title"><a href="#">
+                                                                <%= item.productName %>
+                                                            </a></h4>
+                                                        <span>
+                                                            <span>Size:</em>10.5</span>
+                                                            <span><em>Color:</em> Dark Blue</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="count-input">
+                                                    <span class="icon_user" onclick="deleteCart('<%= item.productId %>')"><i
+                                                            class="bi bi-dash-circle"></i>
+                                                    </span>
+                                                    <span class="px-md-3 px-1 icon_user">
+                                                        <%= item.quantity %>
+                                                    </span>
+                                                    <span class="icon_user" onclick="addCart('<%= item.productId %>')"><i
+                                                            class="bi bi-plus-circle"></i>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td class="text-center text-lg text-medium">
+                                                $ <%= item.productPrice * item.quantity %>
+                                            </td>
+                                            <td class="text-center text-lg text-medium">$<%= (item.productPrice *
+                                                    item.quantity * item.productPercent).toFixed(2) %>
+                                            </td>
+                                            <td class="text-center"><a class="remove-from-cart" href="#"
+                                                    data-toggle="tooltip" title="" data-original-title="Remove item"><i
+                                                        class="fa fa-trash" onclick="deleteAll('<%= item._id %>')"></i></a>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                                <% }) %>
+                            </table>
+                        </div>
+                        <div class="shopping-cart-footer">
+                            <div class="column"><a class="btn btn-outline-secondary" href="/"><i
+                                        class="icon-arrow-left"></i>&nbsp;Back
+                                    to Shopping</a></div>
+                            <div class="column text-lg">TotalPrice: <span class="text-medium">$<%= sumPrice %></span></div>
+                        </div>
                     </div>
-                    <div class="shopping-cart-footer">
-                        <div class="column"><a class="btn btn-outline-secondary" href="/"><i
-                                    class="icon-arrow-left"></i>&nbsp;Back
-                                to Shopping</a></div>
-                        <div class="column text-lg">TotalPrice: <span class="text-medium">$<%= sumPrice %></span></div>
+                    <div class="col-4">
+                        <h2 class="mt-2">Shipping Address</h2>
+                        <form action="/cart/order" method="POST" class="row">
+                            <div class="col-12 mt-2">
+                                <label for="fullName" class="form-label">Tên Người Nhận Hàng</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName"
+                                    placeholder="Nhập vui lòng nhập tên" required>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label for="phone" class="form-label">Số Điện Thoại</label>
+                                <input type="phone" class="form-control" id="phone" name="phone"
+                                    placeholder="Nhập vui lòng nhập số điện thoại" required>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label for="address" class="form-label">Địa Chỉ Nhận Hàng</label>
+                                <input type="text" class="form-control" id="address" name="address"
+                                    placeholder="Nhập vui lòng nhập địa chỉ" required>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <p class="text_cart">Chọn phương thức thanh toán</p>
+                                <div class="d-flex">
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="radio" name="paymentMethods"
+                                            id="paymentMethods" value="Thanh toán khi nhận hàng">
+                                        <label class="form-check-label" for="paymentMethods">
+                                            Thanh toán khi nhận hàng
+                                        </label>
+                                    </div>
+                                    <img style="width: 15%;"
+                                        src="https://simg.zalopay.com.vn/zlp-website/assets/cash_on_delivery_2_8e84a760e1.jpg"
+                                        alt="">
+                                </div>
+                                <div class="d-flex">
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="radio" name="paymentMethods"
+                                            id="paymentMethods" value="Thanh toán bằng PayPal">
+                                        <label class="form-check-label" for="paymentMethods">
+                                            Thanh toán bằng PayPal
+                                        </label>
+                                    </div>
+                                    <img class="img_paypal"
+                                        src="https://logos-world.net/wp-content/uploads/2020/07/PayPal-Logo.png" alt="">
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <p class="text_cart">Phương thức vận chuyển</p>
+                                <select name="shippingCost" id="shippingCost" style="width: 100%;" class="mt-2 px-1 py-1">
+                                    <option value="2">Giao hàng hỏa tốc $2</option>
+                                    <option value="1" selected>Giao hàng tiết kiệm $1</option>
+                                </select>
+                                <div>
+                                    <input type="hidden" id="totalPrice" name="totalPrice" value="<%= sumPrice %>">
+                                    <input type="hidden" id="statusOrder" name="statusOrder" value="OPEN_01">
+                                </div>
+                                <div class="d-flex mt-2">
+                                    <p class="text_cart">Tổng tiền thanh toán: </p>
+                                    <p class="text_cart ps-3">$<%= sumPrice %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-4 col-12 text-end">
+                                <input type="submit" class="btn btn-primary px-4 py-2" value="Check Out">
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="col-4">
-                    <h2 class="mt-2">Shipping Address</h2>
-                    <form action="/cart/order" method="POST" class="row">
-                        <div class="col-12 mt-2">
-                            <label for="fullName" class="form-label">Tên Người Nhận Hàng</label>
-                            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Nhập vui lòng nhập tên" required>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <label for="phone" class="form-label">Số Điện Thoại</label>
-                            <input type="phone" class="form-control" id="phone" name="phone"
-                                placeholder="Nhập vui lòng nhập số điện thoại" required>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <label for="address" class="form-label">Địa Chỉ Nhận Hàng</label>
-                            <input type="text" class="form-control" id="address" name="address"
-                                placeholder="Nhập vui lòng nhập địa chỉ" required>
-                        </div>
-                        <div class="col-12 mt-4">
-                            <p class="text_cart">Chọn phương thức thanh toán</p>
-                            <div class="d-flex">
-                                <div class="form-check mt-2">
-                                    <input class="form-check-input" type="radio" name="paymentMethods"
-                                        id="paymentMethods" value="Thanh toán khi nhận hàng">
-                                    <label class="form-check-label" for="paymentMethods">
-                                        Thanh toán khi nhận hàng
-                                    </label>
-                                </div>
-                                <img style="width: 15%;"
-                                    src="https://simg.zalopay.com.vn/zlp-website/assets/cash_on_delivery_2_8e84a760e1.jpg"
-                                    alt="">
-                            </div>
-                            <div class="d-flex">
-                                <div class="form-check mt-2">
-                                    <input class="form-check-input" type="radio" name="paymentMethods"
-                                        id="paymentMethods" value="Thanh toán bằng PayPal">
-                                    <label class="form-check-label" for="paymentMethods">
-                                        Thanh toán bằng PayPal
-                                    </label>
-                                </div>
-                                <img class="img_paypal"
-                                    src="https://logos-world.net/wp-content/uploads/2020/07/PayPal-Logo.png" alt="">
-                            </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <p class="text_cart">Phương thức vận chuyển</p>
-                            <select name="shippingCost" id="shippingCost" style="width: 100%;" class="mt-2 px-1 py-1">
-                                <option value="2">Giao hàng hỏa tốc $2</option>
-                                <option value="1" selected>Giao hàng tiết kiệm $1</option>
-                            </select>
-                            <div class="d-flex mt-2">
-                                <p class="text_cart">Phí vận chuyển: </p>
-                                <p class="text_cart ps-3">10.000VNĐ</p>
-                            </div>
-                            <div class="d-flex mt-2">
-                                <p class="text_cart">Tổng tiền thanh toán: </p>
-                                <p class="text_cart ps-3">120.000VNĐ</p>
-                            </div>
-                        </div>
-                        <div class="mt-4 col-12 text-end">
-                            <input type="submit" class="btn btn-primary px-4 py-2" value="Check Out">
-                        </div>
-                    </form>
-                </div>
+                <% } %>
             </div>
+            <%- include('../../partials/footer_user.ejs'); %>
             <script>
                 function addCart(cid) {
                     $.ajax({

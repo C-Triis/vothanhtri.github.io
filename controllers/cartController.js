@@ -28,7 +28,7 @@ function CartController() {
 
                         sumPrice += (( rs[i].productPrice * rs[i].quantity) - (rs[i].productPrice * rs[i].productPercent * rs[i].quantity));
                     }
-                    console.log(rs);
+                    // console.log(rs);
                     return res.render('pages/auth/cart', {
                         product: rs,
                         sumPrice: sumPrice

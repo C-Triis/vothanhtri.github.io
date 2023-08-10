@@ -1,49 +1,52 @@
-<header class="position-sticky">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container h-100">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto h-100">
-          <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              <i class="fa-solid fa-house"></i>
-              Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white">
-              <i class="fa-solid fa-gauge"></i>
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link text-white">
-              <i class="fa-solid fa-clipboard"></i>
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white">
-              <i class="fa-solid fa-table-cells"></i>
-              Products
-            </a>
-          </li>
-        </ul>
-       <ul class="navbar-nav">
-        <li class="nav-item01">
-          <a href="#"><span class="icon"><i class="fa-regular fa-bell"></i></span></a>
-        </li>
-        <li class="nav-item01">
-          <a href="#"><span class="icon"><i class="fa-regular fa-user"></i></span></a>
-        </li>
-       </ul>
-          
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32">
+      <use xlink:href="#bootstrap"></use>
+    </svg>
+    <span class="fs-4">Sidebar</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a href="/admin/product/list" class="nav-link active" aria-current="page">
+        <i class="bi bi-house"></i>
+        Home
+      </a>
+    </li>
+    <li class="nav-item">
+        <a href="/admin/brand/list" class="nav-link text-white">
+          <i class="bi bi-award"></i>
+          Brand
+        </a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/listorder" class="nav-link text-white">
+        <i class="bi bi-box-seam"></i>
+        Order
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/promotion/list" class="nav-link text-white">
+        <i class="bi bi-card-list"></i>
+        Promotion
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <div class="dropdown">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
+      data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+      <strong>mdo</strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+      <li><a class="dropdown-item" href="#">New project...</a></li>
+      <li><a class="dropdown-item" href="#">Settings</a></li>
+      <li><a class="dropdown-item" href="#">Profile</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item" href="#">Sign out</a></li>
+    </ul>
+  </div>
+</div>

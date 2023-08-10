@@ -19,7 +19,7 @@ router.get("/list", (req, res) => {
       let productIds = rs[0][i].productIds
       let products = await Product.find({ _id: { $in: productIds } }).lean()
       let productList = products.map(product => product.name_prod)
-      rs[0][i]['productList'] = productList.join(', ')
+      rs[0][i]['productList'] = productList.join(',')
       rs[0][i]['start'] = `${DateServices.getStrDate(
         "DD/MM/YYYY",
         new Date(rs[0][i].start_date)

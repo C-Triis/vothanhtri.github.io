@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head_user.ejs'); %>
+    <link rel="stylesheet" href="/public/css/cart.css">
+    <link rel="stylesheet" href="/public/css/brand_menu.css">
+
+    <body>
+        <%- include('../../partials/header_user.ejs'); %>
+            <section class="mtop section-products">
+                <!-- Vans -->
+                <div class="container">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="header">
+                                <img src="https://drake.vn/image/catalog/H%C3%ACnh%20content/vans-logo-repeat/vans-logo-repeat-11.png"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Single Product -->
+                        <% rs.forEach(function(product) { %>
+                            <% if(product.brandName==="Vans" ){ %>
+                                <div class="col col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                                    <div class="product mb-4">
+                                        <div class="img_pro img_brand border">
+                                            <a href="#">
+                                                <% if(product.percent_prod> 0) { %>
+                                                    <span class="sale">
+                                                        <%= product.percent_prod %>%
+                                                    </span>
+                                                    <% } else { %>
+                                                        <span class="sale" style="display: none;">
+                                                            <%= product.percent_prod %>
+                                                        </span>
+                                                        <% } %>
+                                                            <% if(product.percent_prod> 0) { %>
+                                                                <span class="sale_01">Sale</span>
+                                                                <% } else { %>
+                                                                    <span class="sale_01"
+                                                                        style="display: none;">Sale</span>
+                                                                    <% } %>
+                                                                        <img src="<%= product.img_prod %>" alt=""
+                                                                            class="img-represent">
+                                                                        <div class="icon_brand btn_add_detail">
+                                                                            <div>
+                                                                                <a class="text-uppercase btn btn-primary mb-3"
+                                                                                    href="/detail/<%= product._id %>"
+                                                                                    style="font-size: 12px;">xem chi
+                                                                                    tiết
+                                                                                </a>
+                                                                            </div>
+                                                                            <span class="btn btn-primary"
+                                                                                onclick="addCart('<%= product._id %>')">
+                                                                                <p class="text-uppercase">thêm vào giỏ
+                                                                                    hàng</p>
+                                                                            </span>
+                                                                        </div>
+                                                                        <img src="<%= product.img_prod %>" alt=""
+                                                                            class="img_hover">
+                                            </a>
+                                        </div>
+                                        <div class="reviwes_pro mt-3">
+                                            <div class="name_pro">
+                                                <a href="#">
+                                                    <h4>
+                                                        <%= product.name_prod %>
+                                                    </h4>
+                                                    <p class="price">
+                                                        Giá: $<%= product.price_prod %>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <% }) %>
+                    </div>
+                    <!-- Nike -->
+                    <div class="container mt-3">
+                        <div class="row justify-content-center text-center">
+                            <div class="col-md-8 col-lg-6">
+                                <div class="header">
+                                    <img src="https://1000logos.net/wp-content/uploads/2021/11/Nike-Logo.png" alt=""
+                                        width="400px" height="159px">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Single Product -->
+                            <% rs.forEach(function(product) { %>
+                                <% if(product.brandName==="Nike" ){ %>
+                                    <div class="col col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                                        <div class="product mb-4">
+                                            <div class="img_pro img_brand border">
+                                                <a href="#">
+                                                    <% if(product.percent_prod> 0) { %>
+                                                        <span class="sale">
+                                                            <%= product.percent_prod %>%
+                                                        </span>
+                                                        <% } else { %>
+                                                            <span class="sale" style="display: none;">
+                                                                <%= product.percent_prod %>
+                                                            </span>
+                                                            <% } %>
+                                                                <% if(product.percent_prod> 0) { %>
+                                                                    <span class="sale_01">Sale</span>
+                                                                    <% } else { %>
+                                                                        <span class="sale_01"
+                                                                            style="display: none;">Sale</span>
+                                                                        <% } %>
+                                                                            <img src="<%= product.img_prod %>" alt=""
+                                                                                class="img-represent">
+                                                                            <div class="icon_brand btn_add_detail">
+                                                                                <div>
+                                                                                    <a class="text-uppercase btn btn-primary mb-3"
+                                                                                        href="/detail/<%= product._id %>"
+                                                                                        style="font-size: 12px;">xem chi
+                                                                                        tiết
+                                                                                    </a>
+                                                                                </div>
+                                                                                <span class="btn btn-primary"
+                                                                                    onclick="addCart('<%= product._id %>')">
+                                                                                    <p class="text-uppercase">thêm vào
+                                                                                        giỏ
+                                                                                        hàng</p>
+                                                                                </span>
+                                                                            </div>
+                                                                            <img src="<%= product.img_prod %>" alt=""
+                                                                                class="img_hover">
+                                                </a>
+                                            </div>
+                                            <div class="reviwes_pro mt-3">
+                                                <div class="name_pro">
+                                                    <a href="#">
+                                                        <h4>
+                                                            <%= product.name_prod %>
+                                                        </h4>
+                                                        <p class="price">
+                                                            Giá: $<%= product.price_prod %>
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                        <% }) %>
+                        </div>
+                        <!-- Puma -->
+                        <div class="container mt-3">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-md-8 col-lg-6">
+                                    <div class="header">
+                                        <img src="https://1000logos.net/wp-content/uploads/2017/05/PUMA-logo.jpg" alt=""
+                                            width="400px" height="159px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Single Product -->
+                                <% rs.forEach(function(product) { %>
+                                    <% if(product.brandName==="Puma" ){ %>
+                                        <div
+                                            class="col col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                                            <div class="product mb-4">
+                                                <div class="img_pro img_brand border">
+                                                    <a href="#">
+                                                        <% if(product.percent_prod> 0) { %>
+                                                            <span class="sale">
+                                                                <%= product.percent_prod %>%
+                                                            </span>
+                                                            <% } else { %>
+                                                                <span class="sale" style="display: none;">
+                                                                    <%= product.percent_prod %>
+                                                                </span>
+                                                                <% } %>
+                                                                    <% if(product.percent_prod> 0) { %>
+                                                                        <span class="sale_01">Sale</span>
+                                                                        <% } else { %>
+                                                                            <span class="sale_01"
+                                                                                style="display: none;">Sale</span>
+                                                                            <% } %>
+                                                                                <img src="<%= product.img_prod %>"
+                                                                                    alt="" class="img-represent">
+                                                                                <div class="icon_brand btn_add_detail">
+                                                                                    <div>
+                                                                                        <a class="text-uppercase btn btn-primary mb-3"
+                                                                                            href="/detail/<%= product._id %>"
+                                                                                            style="font-size: 12px;">xem
+                                                                                            chi
+                                                                                            tiết
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <span class="btn btn-primary"
+                                                                                        onclick="addCart('<%= product._id %>')">
+                                                                                        <p class="text-uppercase">thêm
+                                                                                            vào giỏ
+                                                                                            hàng</p>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <img src="<%= product.img_prod %>"
+                                                                                    alt="" class="img_hover">
+                                                    </a>
+                                                </div>
+                                                <div class="reviwes_pro mt-3">
+                                                    <div class="name_pro">
+                                                        <a href="#">
+                                                            <h4>
+                                                                <%= product.name_prod %>
+                                                            </h4>
+                                                            <p class="price">
+                                                                Giá: $<%= product.price_prod %>
+                                                            </p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                            <% }) %>
+                            </div>
+                            <!-- Adias -->
+                            <div class="container mt-3">
+                                <div class="row justify-content-center text-center">
+                                    <div class="col-md-8 col-lg-6">
+                                        <div class="header">
+                                            <img src="https://saigonsneaker.com/wp-content/uploads/2020/01/bieu-tuong-adidas.jpg.webp"
+                                                alt="" height="159px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Single Product -->
+                                    <% rs.forEach(function(product) { %>
+                                        <% if(product.brandName==="Adidas" ){ %>
+                                            <div
+                                                class="col col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                                                <div class="product mb-4">
+                                                    <div class="img_pro img_brand border">
+                                                        <a href="#">
+                                                            <% if(product.percent_prod> 0) { %>
+                                                                <span class="sale">
+                                                                    <%= product.percent_prod %>%
+                                                                </span>
+                                                                <% } else { %>
+                                                                    <span class="sale" style="display: none;">
+                                                                        <%= product.percent_prod %>
+                                                                    </span>
+                                                                    <% } %>
+                                                                        <% if(product.percent_prod> 0) { %>
+                                                                            <span class="sale_01">Sale</span>
+                                                                            <% } else { %>
+                                                                                <span class="sale_01"
+                                                                                    style="display: none;">Sale</span>
+                                                                                <% } %>
+                                                                                    <img src="<%= product.img_prod %>"
+                                                                                        alt="" class="img-represent">
+                                                                                    <div
+                                                                                        class="icon_brand btn_add_detail">
+                                                                                        <div>
+                                                                                            <a class="text-uppercase btn btn-primary mb-3"
+                                                                                                href="/detail/<%= product._id %>"
+                                                                                                style="font-size: 12px;">xem
+                                                                                                chi
+                                                                                                tiết
+                                                                                            </a>
+                                                                                        </div>
+                                                                                        <span class="btn btn-primary"
+                                                                                            onclick="addCart('<%= product._id %>')">
+                                                                                            <p class="text-uppercase">
+                                                                                                thêm vào giỏ
+                                                                                                hàng</p>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <img src="<%= product.img_prod %>"
+                                                                                        alt="" class="img_hover">
+                                                        </a>
+                                                    </div>
+                                                    <div class="reviwes_pro mt-3">
+                                                        <div class="name_pro">
+                                                            <a href="#">
+                                                                <h4>
+                                                                    <%= product.name_prod %>
+                                                                </h4>
+                                                                <p class="price">
+                                                                    Giá: $<%= product.price_prod %>
+                                                                </p>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                                <% }) %>
+                                </div>
+            </section>
+            <%- include('../../partials/footer_user.ejs'); %>
+                <script>
+                    function addCart(cid) {
+                        $.ajax({
+                            type: "POST",
+                            url: `/cart/add?productId=${cid}`,
+                            success: function (rs) {
+                                alert(rs.msg)
+                            }
+                        })
+                    }
+                </script>
+    </body>
+
+</html>

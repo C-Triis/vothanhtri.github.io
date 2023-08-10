@@ -1,13 +1,14 @@
 //Cài đặt khai báo các thư viện sử dụng
 const express = require('express');
 const app = express();
-const CONFIG =require('./config.js');
+const CONFIG = require('./config.js');
 const home = require('./routes/home.js')
 const product = require('./routes/product.js')
 const account = require('./routes/account.js')
 const brand = require('./routes/brands.js')
 const promotion = require('./routes/promotion.js')
 const cart = require('./routes/cart.js')
+const listOrder = require('./routes/listOrder.js')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require("express-session")
@@ -17,28 +18,29 @@ const session = require("express-session")
 //app sử dụng 
 app.set('view engine', 'ejs');
 app.use('/public', express.static('public'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-})); 
+    extended: true
+}));
 
 
 app.use(
     session({
-      secret: "456456456",
-      saveUninitialized: true,
-      cookie: { maxAge: 1000 * 60 * 60 * 24 },
-      resave: false,
+        secret: "456456456",
+        saveUninitialized: true,
+        cookie: { maxAge: 1000 * 60 * 60 * 24 },
+        resave: false,
     })
-  );
+);
 app.use('/admin/product', product)
 app.use("/admin/promotion", promotion)
 app.use('/account', account)
 app.use('/admin/brand', brand)
+app.use('/admin/listorder', listOrder)
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.locals.user = req.session.userId;
     next();
 });
@@ -47,7 +49,7 @@ app.use('/', home)
 app.use('/', cart)
 
 //Kiểm tra mongoodb được kết nối chưa
-mongoose 
+mongoose
     .connect(CONFIG.MONGODB_URL, {
         maxPoolSize: 20,
         useNewUrlParser: true,

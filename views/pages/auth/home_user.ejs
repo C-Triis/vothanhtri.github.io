@@ -9,14 +9,14 @@
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://intphcm.com/data/upload/poster-giay-den.jpg" class="d-block w-100" alt="...">
+                        <img src="https://i.ytimg.com/vi/946LxM11Tco/maxresdefault.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://intphcm.com/data/upload/poster-quang-cao-giay.jpg" class="d-block w-100"
-                            alt="...">
+                        <img src="https://cdna.artstation.com/p/assets/images/images/036/002/188/large/m-n-vinit-img-20210322-204116-186.jpg?1616482578&dl=1"
+                            class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://intphcm.com/data/upload/poster-giay-bien.jpg" class="d-block w-100" alt="...">
+                        <img src="https://i.ytimg.com/vi/4VItGJYxUuI/maxresdefault.jpg" class="d-block w-100" alt="...">
                     </div>
                 </div>
             </div>
@@ -67,32 +67,34 @@
                             <div class="product mb-5">
                                 <div class="img_pro">
                                     <a href="#">
-                                       <% if(product.percent_prod > 0) { %>
-                                        <span class="sale">
-                                            <%= product.percent_prod %>%
-                                        </span>
-                                        <% } else { %>
-                                            <span class="sale" style="display: none;">
-                                                <%= product.percent_prod %>
+                                        <% if(product.percent_prod> 0) { %>
+                                            <span class="sale">
+                                                <%= product.percent_prod %>%
                                             </span>
-                                        <% } %>
-                                        <% if(product.percent_prod > 0) { %>
-                                            <span class="sale_01">Sale</span>
                                             <% } else { %>
-                                                <span class="sale_01" style="display: none;">Sale</span>
-                                            <% } %>
-                                        <img src="<%= product.img_prod %>" alt="" class="img-represent">
-                                        <span class="icon_pro_left">
-                                            <i class="fa-solid fa-heart"></i>
-                                            <i class="fa-solid fa-eye"
-                                                onclick="deleteCart('<%= product._id %>')"></i>
-                                        </span>
-                                        <span class="icon_pro_right">
-                                            <i class="fa-sharp fa-solid fa-bars-staggered"></i>
-                                            <i class="fa-solid fa-cart-shopping"
-                                                onclick="addCart('<%= product._id %>')"></i>
-                                        </span>
-                                        <img src="<%= product.img_prod %>" alt="" class="img_hover">
+                                                <span class="sale" style="display: none;">
+                                                    <%= product.percent_prod %>
+                                                </span>
+                                                <% } %>
+                                                    <% if(product.percent_prod> 0) { %>
+                                                        <span class="sale_01">Sale</span>
+                                                        <% } else { %>
+                                                            <span class="sale_01" style="display: none;">Sale</span>
+                                                            <% } %>
+                                                                <img src="<%= product.img_prod %>" alt=""
+                                                                    class="img-represent">
+                                                                <span class="icon_pro_left">
+                                                                    <i class="fa-solid fa-heart"></i>
+                                                                    <i class="fa-solid fa-eye"
+                                                                        onclick="detail('<%= product._id %>')"></i>
+                                                                </span>
+                                                                <span class="icon_pro_right">
+                                                                    <i class="fa-sharp fa-solid fa-bars-staggered"></i>
+                                                                    <i class="fa-solid fa-cart-shopping"
+                                                                        onclick="addCart('<%= product._id %>')"></i>
+                                                                </span>
+                                                                <img src="<%= product.img_prod %>" alt=""
+                                                                    class="img_hover">
                                     </a>
                                 </div>
                                 <div class="reviwes_pro">
@@ -108,7 +110,8 @@
                                             <h4>
                                                 <%= product.name_prod %>
                                             </h4>
-                                            <p class="price">Hãng: <%= product.brandName %></p>
+                                            <p class="price">Hãng: <%= product.brandName %>
+                                            </p>
                                             <p class="price">
                                                 Giá: $<%= product.price_prod %>
                                             </p>
@@ -124,7 +127,8 @@
             <!-- banner sale -->
             <div class="container-fluid bg_sale">
                 <div class="iz">
-                    <img src="https://donganshoes.vn/wp-content/uploads/2021/12/banner.jpg" alt="">
+                    <img src="https://images.prismic.io/sportsshoesprod/00f60de3-75b0-414a-8af1-3864c726e702_Banner-2.jpg?auto=compress,format"
+                        alt="">
                 </div>
                 <div class="text_sale">
                     <h2>30% Save</h2>
@@ -141,7 +145,7 @@
             <div class="blog container">
                 <div class="box_blog">
                     <div class="blog_img">
-                        <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/blog-5-893x752.jpg"
+                        <img src="https://mcauthenticsneaker.com/upload/images/CNK-Puma-Mayze-Triple-White(1).jpeg"
                             alt="">
                         <span class="icon_left"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <span class="icon_right"><i class="fa-solid fa-link"></i></span>
@@ -157,8 +161,7 @@
                 </div>
                 <div class="box_blog">
                     <div class="blog_img">
-                        <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/blog-5-893x752.jpg"
-                            alt="">
+                        <img src="https://genk.mediacdn.vn/2018/4/12/image-15235107722941993334173.png" alt="">
                         <span class="icon_left"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <span class="icon_right"><i class="fa-solid fa-link"></i></span>
                         <div class="blog_content">
@@ -173,8 +176,7 @@
                 </div>
                 <div class="box_blog">
                     <div class="blog_img">
-                        <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/blog-5-893x752.jpg"
-                            alt="">
+                        <img src="https://hugs.agency/wp-content/uploads/2021/10/1g-1.jpg" alt="">
                         <span class="icon_left"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <span class="icon_right"><i class="fa-solid fa-link"></i></span>
                         <div class="blog_content">
@@ -216,10 +218,10 @@
                             // }
                         })
                     }
-                    function deleteCart(cid) {
+                    function detail(cid) {
                         $.ajax({
-                            type: "DELETE",
-                            url: `/cart/delete?productId=${cid}`,
+                            type: "POST",
+                            url: `/detail/${cid}`,
                             // success: function (rs) {
                             //     alert(rs.msg)
                             // }

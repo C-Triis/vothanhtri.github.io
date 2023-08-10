@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include('../../partials/head'); %>
+
+    <body>
+        <div class="row">
+            <div class="col-2"><%-include('../../partials/header'); %></div>
+            <div class="container col-9">
+                <div class="container mt-4">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+                        <div class="tm-bg-primary-dark tm-block tm-block-products">
+                            <div class="d-flex justify-content-between ">
+                                <h1>Order List </h1>
+                                <div class=" d-flex search">
+                                    <form action="">
+                                        <input type="search" name="search" id="search" placeholder="Search">
+                                        <button type="submit" class="btn-primary p-auto">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tm-product-table-container">
+                                <table class="table table-hover tm-table-small tm-product-table mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">ID Order</th>
+                                            <th scope="col">Total Price</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col" class="text-center">Edit Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% listOrder.forEach(function(item, index) { %>
+                                            <tr>
+                                                <th scope="row" class="align-middle">
+                                                    <%= index+1 %>
+                                                </th>
+                                                <td class="align-middle " style="text-transform: uppercase;">
+                                                    <%= item._id %>
+                                                </td>
+                                                <td class="align-middle ">
+                                                    $<%= item.totalPrice.toFixed(2) %>
+                                                </td>
+                                                <td class="align-middle ">
+                                                    <%= item.statusOrder %>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div onclick='editStatus("<%= item._id %>")' data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">
+                                                        <i class="fa-regular fa-pen-to-square"></i>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- edit -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật trạng thái
+                                                đơn
+                                                hàng</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="formEdit"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function editStatus(idOrder) {
+                $.ajax({
+                    type: "GET",
+                    url: `/admin/listorder/detail/${idOrder}`,
+                    success: function (rs) {
+                        if (rs.s === 200) {
+                            let orderInfo = rs.data
+                            var formEdit = `
+                            <form action="/admin/listorder/uporder" method="POST">
+                                <div>
+                                    <input type="text" class="form-control" id="_id"
+                                    name="_id" value="${orderInfo._id}"
+                                    style="display:none">
+                                </div>
+
+                                <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="statusOrder" id="statusOrder" value="OPEN_01">
+                                        <label class="form-check-label" for="statusOrder">
+                                            OPEN_01
+                                         </label>
+                                </div>
+                                <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="statusOrder" id="statusOrder2" value="OPEN_02">
+                                        <label class="form-check-label" for="statusOrder2">
+                                            OPEN_02
+                                         </label>
+                                </div>
+                                <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="statusOrder" id="statusOrde1r" value="OPEN_03">
+                                        <label class="form-check-label" for="statusOrder1">
+                                            OPEN_03
+                                         </label>
+                                </div>  
+                                <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                                `;
+                            $("#formEdit").html(formEdit);
+                        } else {
+                            alert(rs.msg)
+                        }
+                    }
+                })
+            }
+        </script>
+    </body>
+
+</html>

@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 const OrderDetail = mongoose.Schema(
     {
         orderId: { type: String },
-        priceOrDetail: { type: String },
+        prodPrice: { type: String },
         quantity: { type: String },
-        productId: { type: Array }
+        productId: { type: String }
     },
     { version: false, timestamps: true }
 );

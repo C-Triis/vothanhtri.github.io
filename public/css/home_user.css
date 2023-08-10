@@ -15,16 +15,11 @@
 .nav-item .nav-link{
     display: block;
 }
-.nav-item:hover{
-    transition: 0.3s    ;
-    background: #d4d4d488;
-    border-radius: 12px;
-}
 
 .logo{
-    font-size: 24px;
-    font-weight: 900;
-    font-style: italic;
+font-size: 36px;
+font-weight: 700;
+font-style: italic;
 }
 .icon_user{
     font-size: 18px;
@@ -131,7 +126,8 @@
 }
 
 .blog .blog_img img{
-    width: 100%;
+    width: 370px;
+    height: 370px;
 }
 
 .blog_content{
@@ -180,7 +176,7 @@
     text-align: center;
     color: white;
 }
-@keyframes icon_right{
+@keyframes icon_right{  
     0%{
         right: 0px;
         opacity: 0;

@@ -3,8 +3,9 @@
 <%- include('../../partials/head'); %>
 
     <body>
-        <%-include('../../partials/header'); %>
-            <div class="container">
+        <div class="row">
+            <div class="col-2"><%-include('../../partials/header'); %></div>
+            <div class="container col-9">
                 <div class="container mt-4">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
                         <div class="tm-bg-primary-dark tm-block tm-block-products">
@@ -40,7 +41,9 @@
                                                     <%= promotion.end %>
                                                 </td>
                                                 <td class="align-middle text_js">
-                                                    <%= promotion.productList %>
+                                                    <div class="text_prom">
+                                                        <%= promotion.productList %>
+                                                    </div>
                                                 </td>
                                                 <td class="text-center align-middle">
                                                     <span onclick='editItem("<%= promotion._id %>")' class="icon-cn"
@@ -150,7 +153,7 @@
                                             <label for="productIds" class="d-block">Sản Phẩm</label>
                                             <% Products.forEach(function(item, index) { %>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" name="productIDs"
+                                                    <input class="form-check-input" name="productIds"
                                                         value="<%=item._id %>" type="checkbox">
                                                     <label class="form-check-label">
                                                         <%= item.name_prod %>
@@ -191,6 +194,7 @@
                     </div>
                 </div>
             </div>
+        </div>
             <script>
                 function setValue(date) {
                     const isoString = new Date(date).toISOString();
@@ -255,7 +259,7 @@
                                     <div class="col-12">
                                         <label for="promo_des" class="form-label">Mô tả sản phẩm</label>
                                         <textarea type="text" class="form-control" id="promo_des" name="promo_des"
-                                            placeholder="Thông tin sản phẩm" value="${promotionInfo.promo_des}"></textarea>
+                                            placeholder="Thông tin sản phẩm">${promotionInfo.promo_des}</textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

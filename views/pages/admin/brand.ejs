@@ -3,8 +3,9 @@
 <%-include('../../partials/head'); %>
 
     <body>
-        <%-include('../../partials/header'); %>
-            <div class="container ">
+        <div class="row">
+            <div class="col-2"><%-include('../../partials/header'); %></div>
+            <div class="container col-9">
                 <div class="container mt-4">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
                         <div class="tm-bg-primary-dark tm-block tm-block-products">
@@ -180,31 +181,35 @@
                 </div>
             </div>
 
-            <script>
+        </div>
+        <script>
 
-                // edit Item Product
-                function editItem(brandId) {
-                    $.ajax({
-                        type: "GET",
-                        url: `/admin/brand/detail/${brandId}`,
-                        success: function (rs) {
-                            if (rs.s === 200) {
-                                let brandtInfo = rs.data;
-                                var formEdit = ` 
+            // edit Item Product
+            function editItem(brandId) {
+                $.ajax({
+                    type: "GET",
+                    url: `/admin/brand/detail/${brandId}`,
+                    success: function (rs) {
+                        if (rs.s === 200) {
+                            let brandInfo = rs.data;
+                            var formEdit = ` 
                                 <form class="row g-3" action="/admin/brand/edit" method="post">
+                                    <div>
+                                        <input type="text" class="form-control" id="_id" name="_id" value="${brandInfo._id}" style="display:none">
+                                    </div>
                                     <div class="col-6">
-                                        <img id="oldUrl" height="100px" width="100px" src="${brandtInfo.img_brand}" class="mt-2" />
-                                        <input type="hidden" class="form-control" name="img_prod" id="oldImg" value='${brandtInfo.img_brand}'>
+                                        <img id="oldUrl" height="100px" width="100px" src="${brandInfo.img_brand}" class="mt-2" />
+                                        <input type="hidden" class="form-control" name="img_prod" id="oldImg" value='${brandInfo.img_brand}'>
                                     </div>
                                     <div class="col-6">
                                         <label for="name_brand" class="form-label">Tên hãng</label>
                                         <input type="text" class="form-control ps-3" id="brandName" name="brandName"
-                                            value="${brandtInfo.brandName}">
+                                            value="${brandInfo.brandName}">
                                     </div>
                                     <div class="col-12">
                                         <label for="des_brand" class="form-label">Mô tả sản phẩm</label>
                                         <textarea type="text" class="form-control" id="des_brand" name="des_brand"
-                                            placeholder="Thông tin sản phẩm">${brandtInfo.des_brand}</textarea>
+                                            placeholder="Thông tin sản phẩm">${brandInfo.des_brand}</textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -213,105 +218,105 @@
                                     </div>
                                 </form>
                                     `;
-                                $("#formEdit").html(formEdit);
-                            } else {
-                                alert(rs.msg);
-                            }
-                        },
-                    });
-                }
-
-                // delete Item brand
-                function deleteItem(brandId) {
-                    $.ajax({
-                        type: "DELETE",
-                        url: `/admin/brand/delete/${brandId}`,
-                        success: function (rs) {
-                            console.log(rs);
-                            if (rs.s === 200) {
-                                window.location.reload();
-                            } else {
-                                alert(rs.msg);
-                            }
-                        },
-                    });
-                }
-
-                // add Img brand
-                $('#btnUploadImg').on('click', function () {
-                    var myformData = new FormData();
-                    myformData.append('file', $('#img')[0].files[0]);
-                    console.log(myformData);
-                    $.ajax({
-                        url: '/upload-image',
-                        type: 'POST',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        data: myformData,
-                        enctype: 'multipart/form-data',
-                        success: function (rs) {
-                            if (rs.s === 200) {
-                                $("#imgAdd").attr("src", rs.url);
-                                $("#img_brand").val(rs.url)
-                                console.log(rs.url);
-                            } else {
-                                alert(rs.msg);
-                            }
-                        },
-                    });
+                            $("#formEdit").html(formEdit);
+                        } else {
+                            alert(rs.msg);
+                        }
+                    },
                 });
+            }
 
-                // add Img Product
-                $('#btnUploadImg').on('click', function () {
-                    var myformData = new FormData();
-                    myformData.append('file', $('#img')[0].files[0]);
-                    console.log(myformData);
-                    $.ajax({
-                        url: '/upload-image',
-                        type: 'POST',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        data: myformData,
-                        enctype: 'multipart/form-data',
-                        success: function (rs) {
-                            if (rs.s === 200) {
-                                $("#imgAdd").attr("src", rs.url);
-                                $("#img_prod").val(rs.url)
-                                console.log(rs.url);
-                            } else {
-                                alert(rs.msg);
-                            }
-                        },
-                    });
+            // delete Item brand
+            function deleteItem(brandId) {
+                $.ajax({
+                    type: "DELETE",
+                    url: `/admin/brand/delete/${brandId}`,
+                    success: function (rs) {
+                        console.log(rs);
+                        if (rs.s === 200) {
+                            window.location.reload();
+                        } else {
+                            alert(rs.msg);
+                        }
+                    },
                 });
+            }
 
-                // changeImage
-                $('#btnImgOld').on('click', function () {
-                    var myformData = new FormData();
-                    myformData.append('file', $('#changeImg')[0].files[0]);
-                    console.log(myformData);
-                    $.ajax({
-                        url: '/upload-image',
-                        type: 'POST',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        data: myformData,
-                        enctype: 'multipart/form-data',
-                        success: function (rs) {
-                            if (rs.s === 200) {
-                                $('#oldUrl').attr('src', rs.url);
-                                $('#oldImg').val(rs.url);
-                                console.log(rs.url);
-                            } else {
-                                alert(rs.msg)
-                            }
-                        },
-                    });
+            // add Img brand
+            $('#btnUploadImg').on('click', function () {
+                var myformData = new FormData();
+                myformData.append('file', $('#img')[0].files[0]);
+                console.log(myformData);
+                $.ajax({
+                    url: '/upload-image',
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: myformData,
+                    enctype: 'multipart/form-data',
+                    success: function (rs) {
+                        if (rs.s === 200) {
+                            $("#imgAdd").attr("src", rs.url);
+                            $("#img_brand").val(rs.url)
+                            console.log(rs.url);
+                        } else {
+                            alert(rs.msg);
+                        }
+                    },
                 });
-            </script>
+            });
+
+            // add Img Product
+            $('#btnUploadImg').on('click', function () {
+                var myformData = new FormData();
+                myformData.append('file', $('#img')[0].files[0]);
+                console.log(myformData);
+                $.ajax({
+                    url: '/upload-image',
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: myformData,
+                    enctype: 'multipart/form-data',
+                    success: function (rs) {
+                        if (rs.s === 200) {
+                            $("#imgAdd").attr("src", rs.url);
+                            $("#img_prod").val(rs.url)
+                            console.log(rs.url);
+                        } else {
+                            alert(rs.msg);
+                        }
+                    },
+                });
+            });
+
+            // changeImage
+            $('#btnImgOld').on('click', function () {
+                var myformData = new FormData();
+                myformData.append('file', $('#changeImg')[0].files[0]);
+                console.log(myformData);
+                $.ajax({
+                    url: '/upload-image',
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: myformData,
+                    enctype: 'multipart/form-data',
+                    success: function (rs) {
+                        if (rs.s === 200) {
+                            $('#oldUrl').attr('src', rs.url);
+                            $('#oldImg').val(rs.url);
+                            console.log(rs.url);
+                        } else {
+                            alert(rs.msg)
+                        }
+                    },
+                });
+            });
+        </script>
     </body>
 
 </html>

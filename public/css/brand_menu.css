@@ -1,0 +1,50 @@
+.icon_brand{
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.img_brand{
+    background-color: rgba(224, 224, 224, 0.5);
+    border-radius: 8px;
+}
+
+.header h2{
+    color: rgb(48, 48, 48);
+}
+
+.img_detail{
+    padding: 36px 0;
+    border-radius: 8px;
+    background-color: rgba(201, 201, 201, 0.7);
+}
+
+.img_detail img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes btn_add_detail{
+    0%{
+        left: 0px;
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+        left: 25%;
+    }
+}
+
+.btn_add_detail{
+    position: absolute;
+    bottom: 0%;
+    left: 25%;
+    visibility: hidden;
+    text-align: center;
+}
+
+.product:hover .btn_add_detail{
+    z-index: 99;
+    visibility: visible;
+    animation: btn_add_detail 1.5s;
+}

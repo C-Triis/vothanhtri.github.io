@@ -61,6 +61,7 @@ function PromotionController() {
                     Promotion.findById(promotionId).lean(),
                     Product.find().lean()
                 ]).then( rs => {
+                    console.log(rs);
                     if(!rs[0]){
                         return res.json({ s: 404, msg: 'Promotion not found'})
                     };

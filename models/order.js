@@ -9,7 +9,8 @@ const Order = mongoose.Schema(
         address: { type: String },
         totalPrice: { type: Number },
         paymentMethods: { type: String },
-        shippingCost: { type: Number}
+        shippingCost: { type: Number},
+        statusOrder: { type: String } 
     },
     {
         version: false, timestamps: true

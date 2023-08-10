@@ -6,7 +6,7 @@ const Product = require('../models/product.js').Product
 
 function ProductController() {
   const SELF = {
-    SIZE: 10,
+    SIZE: 8,
   };
   return {
     getList: (page, keySearch) => {
@@ -64,8 +64,12 @@ function ProductController() {
       try {
         return new Promise((resolve, reject) => {
           Product.find()
-            .then((rs) => {
-              resolve(rs);
+            .then(async(rs) => {
+              for(let i = 0, ii = rs.length; i < ii; i++) {
+                let brandInfo = await  BrandController.getBrandById(rs[i].brandId)
+                rs[i]['brandName'] = brandInfo.brandName;
+              }
+              return resolve(rs)
             })
             .catch((err) => {
               console.log(err);
@@ -137,6 +141,20 @@ function ProductController() {
         console.log(e);
       })
     },
+    getProd: async(req, res) => {
+      try {
+        let productId = req.params?.id;
+        let productInfo = await Product.findById(productId);
+        if (!productInfo) {
+          return res.json({ s: 404, msg: "Product not found" });
+        }
+        return res.render("pages/auth/detail", {
+          prod: productInfo
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 }
 

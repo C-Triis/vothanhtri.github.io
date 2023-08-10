@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head_user.ejs'); %>
+    <link rel="stylesheet" href="/public/css/cart.css">
+    <link rel="stylesheet" href="/public/css/brand_menu.css">
+
+    <body>
+        <%- include('../../partials/header_user.ejs'); %>
+    </body>
+    <div class="container mtop">
+        <div class="row">
+            <div class="col-6">
+                <div class="border img_detail">
+                    <img src="<%= prod.img_prod %>" alt="" width="280px">
+                </div>
+            </div>
+            <div class="col-6">
+                <h2 class="pt-2">
+                    <%= prod.name_prod %>
+                </h2>
+                <div class="d-flex">
+                    <div class="text-warning fs-5">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <span class="ps-3"><i class="bi bi-cart fs-5"></i></span>
+                </div>
+                <h5 class="pt-3">$<%= prod.price_prod %>
+                </h5>
+                <p class="text-dark" style="font-size: 18px;">
+                    <%= prod.des_prod %>
+                </p>
+                <span class="btn btn-warning text-light mt-5" onclick="addCart('<%= prod._id %>')">Thêm Vào Giỏ Hàng</span>
+            </div>
+        </div>
+    </div>
+    <%- include('../../partials/footer_user.ejs'); %>
+        <script>
+            function addCart(cid) {
+                $.ajax({
+                    type: "POST",
+                    url: `/cart/add?productId=${cid}`,
+                    // success: function (rs) {
+                    //     alert(rs.msg)
+                    // }
+                })
+            }
+        </script>
+
+</html>

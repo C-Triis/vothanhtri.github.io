@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router({});
 const ProductController = require('../controllers/productController.js');
+const PromotionController = require("../controllers/promotionController.js")
 // const UserController = require('../controllers/userController.js');
 const multer = require("multer");
 const fileService = require('../services/fileService.js');
@@ -24,25 +25,23 @@ router.get("/", (req, res) => {
       })
   })
 });
-router.get("/chart", (req, res) => {
-      res.render("pages/auth/chart.ejs", {
-      })
-});
 
-// router.get("/register", (req, res) => {
-//   res.render("pages/admin/register");
-// });
-// router.get("/verifyUser", (req, res) => {
-//   res.render("pages/admin/verify");
-// });
+router.get("/brand", (req, res) => {
+  ProductController.getListDB().then(rs =>{
+    res.render("pages/auth/brand_menu", {
+        rs: rs,
+    })
+})
+})
 
-// router.get("/confirm", (req, res) => {
-//   res.render("pages/admin/reset");
-// });
+router.get("/detail/:id", ProductController.getProd)
 
-// router.post("/register", UserController.register);
-// router.post("/verify", UserController.verify);
-// router.post("/login", UserController.login);
-// router.post("/confirm", UserController.confirm);
+router.get("/promotion",(req, res) => {
+  PromotionController.getList().then( rs=>{
+    res.render("pages/auth/promotion", {
+      prom: rs
+    })
+  })
+})
 
 module.exports = router;
