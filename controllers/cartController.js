@@ -13,7 +13,7 @@ function CartController() {
                 let uId = req.session?.userId;   
                 let userInfor = await User.findById(uId).lean();
                 if(!userInfor) {
-                    return res.json({ s: 404, msg: 'Not found User'})
+                    return res.render("pages/account/login")
                 }
                 return Cart.find({ userId: uId}).lean().then( async rs => {
                     let sumPrice = 0;

@@ -113,7 +113,15 @@
                                             <p class="price">Hãng: <%= product.brandName %>
                                             </p>
                                             <p class="price">
-                                                Giá: $<%= product.price_prod %>
+                                                Giá: 
+                                                <% if( product.percent_prod > 0){ %>
+                                                    <span
+                                                    class="text-decoration-line-through text_price">$
+                                                    <%= product.price_prod %></span>
+                                                    <span class="ps-2">$<%= (product.price_prod -(product.price_prod*(product.percent_prod/100))).toFixed(2)  %></span>
+                                                <% } else { %>
+                                                    <span>$<%= product.price_prod %></span>
+                                                <% } %>
                                             </p>
                                         </a>
                                     </div>
@@ -134,7 +142,7 @@
                     <h2>30% Save</h2>
                     <p>Latest Ceramic Art</p>
                     <span>There are many variations of passages of Lorem.</span>
-                    <button><a href="#">Shop Now</a></button>
+                    <button><a href="/brand">Shop Now</a></button>
                 </div>
             </div>
 

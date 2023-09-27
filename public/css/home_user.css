@@ -577,3 +577,13 @@ font-style: italic;
 .info .info_list .info_item{
     padding: 4px 0;
 }
+
+.dropdown-menu[data-bs-popper]{
+    top: 80%;
+    right: 5%;
+    left: 80%;
+}
+
+.text_price{
+    color: #bfbfbf;
+}

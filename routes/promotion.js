@@ -2,9 +2,11 @@
 const express = require('express');
 const router = express.Router({});
 const PromotionController = require('../controllers/promotionController');
+const UserController = require("../controllers/userController")
 const Product = require('../models/product').Product
 const DateServices = require('../services/date')
 
+router.use(UserController.checkLogin);
 router.get("/list", (req, res) => {
   let page = req.query.page;
   let keySearch = req.query.keySearch || "";

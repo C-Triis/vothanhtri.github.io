@@ -3,13 +3,14 @@
 const express = require('express');
 const router = express.Router({});
 const BrandController = require('../controllers/brandController.js');
+const UserController = require("../controllers/userController.js")
 const multer = require("multer");
 const fileService = require('../services/fileService.js');
 const upload = multer({
     storage: multer.memoryStorage(),
 });
 
-// router.get('/list', BrandController.getList);
+router.use(UserController.checkLogin);
 router.get("/list", (req, res) => {
     BrandController.getList().then(rs => {
         res.render("pages/admin/brand", {

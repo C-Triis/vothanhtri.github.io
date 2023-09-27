@@ -11,7 +11,7 @@ const upload = multer({
   storage: multer.memoryStorage(),
 });
 
-// router.use(UserController.checkLogin);
+router.use(UserController.checkLogin);
 // router.get('/list', ProductController.getList);
 router.get("/list", (req, res) => {
     let page = req.query.page;

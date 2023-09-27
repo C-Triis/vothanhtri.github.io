@@ -3,11 +3,11 @@
 <%- include('../../partials/head'); %>
 
     <body>
-        <%- include('../../partials/header'); %>
-
-            <div class="container-fluid bg">
-                <div class="row">
-                    <div class="wrapper position-absolute top-50 start-50 translate-middle">
+        <div class="row">
+            <div class="col-2"><%-include('../../partials/header'); %></div>
+            <div class="container col-9">
+                <div class="row mt-5">
+                    <div class="wrapper_01 mt-5">
                         <div class="box-form">
                             <h3 class="text-center mb-4 text-uppercase mt-3">Sign In</h3>
                             <form action="/account/login" method="POST">
@@ -20,13 +20,12 @@
                                     <input type="password" name="password" id="password" required>
                                 </div>
                                 <div class="btn-sub mt-4 text-end  d-flex justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Remember me                                       
-                                        </label>    
-                                      </div>
-                                    <p><a href="#"class="text-decoration-none">Forgot password?</a></p>
+                                    <div class="d-flex">
+                                        <p class="text-dark">Tạo tài khoản mới</p>
+                                        <a href="/account/register" class="ps-2 text-decoration-none fw-bold">Create
+                                            Account</a>
+                                    </div>
+                                    <p><a href="#" class="text-decoration-none">Forgot password?</a></p>
                                 </div>
                                 <div class="btn-sub mt-4 text-end">
                                     <button type="submit" class="btn btn-bg">Sign In</button>
@@ -36,7 +35,7 @@
                     </div>
                 </div>
             </div>
-
+        </div>
     </body>
 
 </html>

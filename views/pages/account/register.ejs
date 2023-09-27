@@ -3,12 +3,11 @@
 <%- include('../../partials/head'); %>
 
     <body>
-
-        <%- include('../../partials/header'); %>
-
-            <div class="container-fluid bg">
+        <div class="row"> 
+            <div class="col-2"><%-include('../../partials/header'); %></div>
+            <div class="container col-9">
                 <div class="row">
-                    <div class="wrapper mt-5 mb-5">
+                    <div class="wrapper_01 mt-2">
                         <div class="box-form">
                             <h3 class="text-center mb-4 text-uppercase mt-3">Register an account</h3>
                             <form action="/account/register" method="POST">
@@ -29,22 +28,25 @@
                                     <input type="email" id="email" name="email" required>
                                 </div>
                                 <div class="form-check mt-4">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
-                                    <label class="form-check-label" for="flexCheckDefault" >
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                        required>
+                                    <label class="form-check-label" for="flexCheckDefault">
                                         I Agree To The Terms & Conditions
                                     </label>
                                 </div>
                                 <div class="btn-sub mt-4 text-end">
                                     <button type="submit" class="btn btn-bg">Sign In</button>
                                 </div>
-                                <div class="btn-sub mt-2">
-                                    <p>Already have an account?   <a href="#" class="text-decoration-none">Sign In</a></p>
+                                <div class="btn-sub mt-2 d-flex">
+                                    <p>Already have an account?</p>
+                                    <a href="/account/login" class="text-decoration-none ps-2 fw-bold">Sign In</a>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </body>
 
 </html>
